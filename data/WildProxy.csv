@@ -1,0 +1,997 @@
+Card Name,Percent of decks that play this card,Avg copies in those decks,Deck winrate,Times played
+Incanter's Flow,12.5,2,59.2,59,000
+Sorcerer's Apprentice,11.7,2,60.0,49,000
+Refreshing Spring Water,12.0,2,59.8,49,000
+Frostbolt,12.7,1.9,59.3,49,000
+Research Project,11.4,2,59.8,48,000
+Conjure Mana Biscuit,10.9,2,60.4,48,000
+Runed Orb,11.5,1.9,59.5,46,000
+Magic Trick,10.8,1.9,59.9,45,000
+Ray of Frost,11.7,1.9,59.7,43,000
+Primordial Glyph,10.1,1.9,59.7,41,000
+Flamewaker,8.7,2,61.2,38,000
+Ice Lance,9.9,2,61.3,36,000
+Arcane Intellect,7.7,1.9,58.1,29,000
+Coldlight Oracle,6.8,1.7,48.7,28,000
+Arcane Intellect,7.3,1.8,58.0,27,000
+Ice Block,8.9,1.4,59.0,24,000
+Zephrys the Great,13.2,1,57.8,23,000
+Arcane Missiles,6.3,1.9,59.6,23,000
+Palm Reading,7.5,1.6,57.1,22,000
+Ancient Mysteries,6.7,1.6,61.9,21,000
+Shadow Visions,7.6,1.5,58.1,20,000
+Armor Vendor,5.7,1.6,55.1,19,000
+Crabrider,6.6,1.9,68.3,19,000
+Wand Thief,5.1,1.6,51.5,18,000
+Devolving Missiles,7.9,1.4,57.4,18,000
+Raise Dead,9.1,1.4,54.9,18,000
+Hysteria,9.4,1.5,57.5,18,000
+Pen Flinger,3.1,1.4,57.9,17,000
+Far Watch Post,5.7,1.7,57.6,17,000
+Kobold Librarian,4.4,1.8,58.6,16,000
+Hand of A'dal,4.9,1.9,63.1,16,000
+Swindle,4.8,1.8,52.9,16,000
+Tour Guide,5.8,1.7,57.1,16,000
+Renew,5.8,1.6,54.3,15,000
+Khartut Defender,6.6,1.4,52.6,15,000
+Stargazer Luna,8.3,1,61.7,14,000
+Ferocious Howl,3.5,1.9,52.8,14,000
+Cram Session,4.1,1.9,58.6,14,000
+Mad Scientist,5.2,1.7,64.2,14,000
+Frost Nova,4.1,1.7,53.7,14,000
+Kazakus,7.3,1,59.2,14,000
+Nature Studies,3.7,1.8,52.4,14,000
+Novice Engineer,4.6,1.5,52.8,13,000
+Explosive Runes,3.9,1.8,65.2,13,000
+Penance,6.1,1.4,59.1,13,000
+Lightning Bloom,5.0,1.8,52.4,13,000
+Dirty Rat,6.7,1.1,57.1,12,000
+Reno Jackson,12.2,1,57.2,12,000
+Spirit Jailer,3.2,1.9,50.4,12,000
+Zilliax,8.1,1,55.0,12,000
+Taelan Fordring,7.6,1,54.1,12,000
+Branching Paths,3.3,1.9,54.3,12,000
+Crystology,3.8,1.9,65.9,11,000
+Rigged Faire Game,3.9,1.6,64.5,11,000
+Brann Bronzebeard,7.7,1,54.0,11,000
+Overgrowth,3.5,1.8,51.3,11,000
+Knight of Anointment,3.0,1.9,57.0,11,000
+Secret Passage,4.6,1.7,53.8,11,000
+Shadowstep,3.5,1.8,53.3,10,000
+Glacial Shard,3.8,1.5,58.6,10,000
+Shadow Essence,3.6,1.9,58.2,10,000
+Insight,4.2,1.4,54.7,10,000
+Kabal Lackey,3.3,1.9,68.0,10,000
+Kirin Tor Mage,3.5,1.9,67.5,10,000
+Shadowstep,3.3,1.8,47.5,10,000
+Animated Broomstick,4.7,1.7,57.5,10,000
+Southsea Deckhand,3.3,1.9,60.2,10,000
+Medivh's Valet,3.3,1.9,68.0,9,900
+Oaken Summons,2.3,2,55.2,9,900
+Doomsayer,3.8,1.4,51.6,9,800
+Kabal Crystal Runner,3.2,1.9,68.2,9,700
+Emperor Thaurissan,6.2,1,50.6,9,600
+Sap,3.8,1.6,51.0,9,600
+Drain Soul,3.3,1.6,54.4,9,500
+Defile,5.0,1.5,56.5,9,500
+Righteous Protector,2.7,1.9,63.7,9,400
+Primordial Studies,2.7,1.7,52.4,9,400
+Soul Shear,3.0,1.8,48.8,9,400
+Flame Ward,4.6,1.2,58.8,9,400
+Vanish,4.0,1.7,50.0,9,400
+First Day of School,2.9,1.9,63.6,9,300
+Archmage Vargoth,6.5,1,55.9,9,300
+Bloodmage Thalnos,5.0,1,51.2,9,200
+Venomous Scorpid,3.3,1.6,50.0,9,100
+Thrive in the Shadows,3.6,1.5,57.5,9,100
+Shield Block,2.9,1.8,45.3,9,000
+Preparation,2.9,1.8,49.2,8,900
+Fireball,3.9,1.8,60.0,8,900
+Loatheb,6.3,1,57.8,8,800
+Prize Vendor,2.1,1.8,47.4,8,700
+Mass Hysteria,6.5,1.3,58.3,8,700
+Netherwind Portal,3.5,1.3,63.5,8,700
+Demon Companion,3.3,1.8,58.3,8,600
+Mistress of Mixtures,2.7,1.4,55.3,8,500
+Brain Freeze,2.9,1.6,50.3,8,500
+Preparation,2.7,1.8,55.8,8,500
+Illidari Studies,2.8,1.8,52.2,8,400
+Cutting Class,2.8,1.8,52.7,8,400
+Mankrik,4.7,1,53.9,8,300
+Raza the Chained,3.5,1,60.9,8,300
+Biology Project,2.2,1.9,50.0,8,200
+Cloud Prince,3.6,1.9,66.7,8,200
+Eviscerate,2.7,1.7,51.8,8,200
+Evocation,6.3,1,60.5,8,000
+Spirit Lash,4.8,1.3,59.2,8,000
+Swipe,2.5,1.8,53.0,8,000
+Acolyte of Pain,3.2,1.3,52.2,7,900
+Convincing Infiltrator,2.8,1.6,51.5,7,900
+Eternal Servitude,3.9,1.8,57.1,7,900
+Dark Skies,3.8,1.4,56.3,7,800
+Counterspell,2.6,1.7,63.0,7,800
+Resurrect,3.4,1.9,56.7,7,800
+Sword of the Fallen,2.6,2,64.3,7,800
+Naturalize,2.5,1.7,49.4,7,800
+Arcane Flakmage,3.3,1.9,67.6,7,800
+Bad Luck Albatross,3.0,1.6,56.2,7,700
+Breath of the Infinite,4.2,1.4,58.2,7,600
+Solar Eclipse,2.7,1.8,51.3,7,600
+Wildfire,2.2,1.6,53.5,7,600
+Manafeeder Panthara,2.7,1.7,53.9,7,500
+Lab Recruiter,2.4,1.7,47.6,7,400
+Backstab,2.3,1.7,51.1,7,400
+Questing Explorer,2.2,1.7,55.8,7,400
+Intrepid Initiate,2.9,1.9,61.7,7,300
+Cavern Shinyfinder,2.4,1.7,53.5,7,300
+Aldor Attendant,1.8,2,56.4,7,300
+Shadowreaper Anduin,3.9,1,59.9,7,200
+Expired Merchant,2.7,1.7,59.5,7,100
+Conviction (Rank 1),2.8,1.7,66.6,7,100
+Fireball,2.9,1.8,58.3,7,100
+Adorable Infestation,3.0,1.9,61.8,7,100
+Voidcaller,2.6,1.5,59.6,7,000
+Bloodsail Flybooter,1.2,1.9,63.0,7,000
+Corrupt the Waters,1.9,1,48.7,6,900
+Wandmaker,2.1,1.7,52.7,6,900
+Oh My Yogg!,3.2,1.8,63.5,6,900
+Power Word: Shield,2.9,1.4,54.6,6,900
+Loot Hoarder,2.4,1.7,41.9,6,900
+Underbelly Angler,2.6,2,69.5,6,800
+Shield of Galakrond,2.4,1.7,52.7,6,800
+Tracking,2.6,1.9,56.5,6,800
+Twin Slice,2.6,2,55.8,6,800
+Spawnpool Forager,2.5,2,70.6,6,800
+Northshire Cleric,2.9,1.2,58.7,6,700
+Shadow Word: Pain,3.6,1.3,56.8,6,600
+Spreading Plague,2.4,1.8,54.1,6,600
+Libram of Wisdom,1.8,1.9,56.4,6,600
+Arcanologist,2.2,1.9,64.0,6,600
+Luckysoul Hoarder,2.0,1.9,51.5,6,600
+South Coast Chieftain,2.7,1.9,70.0,6,500
+Wolpertinger,2.4,1.8,59.2,6,500
+Malchezaar's Imp,1.7,2,60.6,6,500
+Jade Blossom,1.5,1.9,51.0,6,400
+Lesser Jasper Spellstone,1.7,1.8,53.5,6,400
+Scavenger's Ingenuity,2.5,1.8,55.8,6,400
+Wrath,1.9,1.8,46.5,6,300
+Blizzard,2.9,1.4,51.1,6,300
+Skull of Gul'dan,2.9,1.8,49.7,6,300
+Ultimate Infestation,2.8,1.8,54.6,6,300
+Soulfire,2.1,1.9,59.2,6,200
+Zola the Gorgon,5.1,1,54.7,6,200
+Murloc Warleader,3.0,1.9,67.3,6,200
+Sphere of Sapience,3.2,1,54.2,6,100
+Counterspell,2.1,1.6,61.8,6,100
+Nerub'ar Weblord,2.0,2,67.5,6,100
+Deathlord,2.2,1.6,46.8,6,100
+School Spirits,2.1,1.8,51.5,6,100
+Dread Corsair,1.9,1.9,62.1,6,000
+Dragon's Hoard,2.0,1.5,49.8,6,000
+Leper Gnome,2.2,1.9,53.5,5,900
+Arcanologist,1.9,1.8,64.8,5,900
+Chaos Strike,1.7,1.9,47.3,5,800
+Psychic Scream,4.4,1.2,58.9,5,800
+Lushwater Scout,2.5,1.9,70.4,5,700
+Murloc Tinyfin,2.1,1.9,66.7,5,700
+Innervate,1.9,1.9,46.9,5,700
+Jade Idol,1.6,1.6,51.7,5,700
+Deadly Poison,1.7,1.9,53.6,5,600
+Gnomeferatu,2.1,1.2,54.7,5,600
+Murmy,2.2,1.9,67.8,5,600
+Voidwalker,1.8,1.9,50.4,5,600
+Lorekeeper Polkelt,3.3,1,58.6,5,500
+Call to Arms,1.9,2,67.0,5,500
+Toxfin,2.8,1.7,68.3,5,500
+N'Zoth, the Corruptor,5.9,1,53.6,5,500
+Prize Plunderer,1.6,1.8,54.9,5,400
+Efficient Octo-bot,1.5,1.7,48.1,5,400
+Aldor Truthseeker,1.7,1.9,57.8,5,400
+Mor'shan Watch Post,2.0,1.6,50.2,5,400
+Plague of Flames,2.4,1.7,57.9,5,400
+Dragonqueen Alexstrasza,5.2,1,56.9,5,400
+Togwaggle's Scheme,3.5,1.5,47.6,5,300
+Rockpool Hunter,2.1,1.9,70.0,5,300
+Dirty Tricks,2.1,1.6,45.7,5,300
+Reckless Apprentice,2.0,1.7,54.3,5,300
+Mass Resurrection,4.0,1.7,56.9,5,200
+Spectral Cutlass,1.7,1.8,49.0,5,200
+Mozaki, Master Duelist,1.9,1,60.2,5,200
+Clever Disguise,1.7,1.6,50.5,5,200
+Tickatus,3.8,1,54.9,5,200
+Nourish,2.0,1.7,48.9,5,200
+Animal Companion,2.3,1.7,55.4,5,200
+Wave of Apathy,3.5,1.2,58.8,5,100
+Cloak of Shadows,1.7,1.7,50.9,5,000
+Grimestreet Outfitter,1.1,2,66.7,5,000
+Font of Power,1.4,1.9,53.3,5,000
+Draconic Studies,1.6,1.5,50.3,5,000
+Activate the Obelisk,1.4,1,49.0,5,000
+Loot Hoarder,1.7,1.4,54.2,4,900
+Shadow Word: Death,3.5,1.2,55.9,4,900
+Strongman,1.8,1.8,54.1,4,900
+Imprisoned Felmaw,2.0,1.7,64.6,4,900
+Backstab,1.5,1.7,45.0,4,800
+Devoted Maniac,1.6,1.7,52.5,4,800
+Evasion,1.6,1.6,51.6,4,800
+Enhanced Dreadlord,3.7,1.4,56.8,4,700
+Occult Conjurer,2.8,1.3,67.8,4,700
+Seance,3.2,1.1,56.2,4,700
+Celestial Alignment,1.6,1.9,53.3,4,700
+Lunar Eclipse,1.6,1.8,54.7,4,700
+Battlefiend,1.6,1.9,51.0,4,600
+Death's Head Cultist,2.1,1.6,46.4,4,600
+Envoy Rustwix,3.0,1,53.1,4,600
+EVIL Miscreant,1.6,1.6,54.8,4,600
+Alexstrasza the Life-Binder,4.5,1,54.2,4,600
+Wicked Whispers,1.5,1.9,60.4,4,600
+Blessing of Kings,1.7,1.9,67.4,4,600
+Ring Toss,2.1,1.5,54.4,4,600
+Far Sight,1.7,1.5,50.2,4,600
+Antique Healbot,2.7,1.3,51.2,4,600
+Lifedrinker,1.7,1.6,48.8,4,600
+Shielded Minibot,1.9,1.9,66.8,4,500
+Nofin Can Stop Us,2.5,1.9,70.6,4,500
+Coerce,2.2,1.4,48.9,4,500
+Ice Fishing,2.4,1.7,69.1,4,500
+Holy Smite,2.3,1.3,59.7,4,500
+Kazakus, Golem Shaper,2.7,1,55.9,4,400
+Hench-Clan Burglar,1.5,1.6,51.1,4,400
+Bloodmage Thalnos,2.4,1,55.4,4,400
+Mortal Coil,1.6,1.5,54.1,4,400
+Deadly Poison,1.3,1.8,48.9,4,400
+Vendetta,1.5,1.6,52.1,4,300
+Mass Dispel,3.0,1.2,54.8,4,300
+Phase Stalker,1.6,1.7,59.5,4,300
+Siphon Soul,1.9,1.5,52.6,4,300
+Redemption,2.0,1.9,62.3,4,300
+Tinker's Sharpsword Oil,1.6,1.8,54.6,4,300
+Horde Operative,2.6,1.3,46.8,4,300
+Blood of G'huun,3.4,1.7,58.3,4,300
+Battlefiend,1.4,2,55.9,4,300
+Paralytic Poison,1.6,1.5,51.4,4,300
+Murloc Tidecaller,1.6,1.9,67.8,4,300
+Swashburglar,1.2,1.6,49.0,4,300
+Gang Up,1.6,1.7,46.9,4,200
+Tar Creeper,1.8,1.6,44.0,4,200
+Saronite Chain Gang,1.5,1.6,50.3,4,200
+Target Dummy,1.2,1.9,61.0,4,200
+Kill Command,2.4,1.8,57.8,4,200
+Murloc Tidecaller,1.5,1.9,67.9,4,200
+Apexis Blast,1.3,1.9,53.5,4,200
+Spectral Sight,1.3,1.8,42.8,4,100
+Stonehill Defender,1.5,1.6,49.8,4,100
+The Caverns Below,1.1,1,62.4,4,100
+Twisting Nether,3.0,1.4,54.1,4,100
+Thoughtsteal,1.7,1.3,52.8,4,000
+Awaken the Makers,1.1,1,50.3,4,000
+Quick Shot,2.0,1.9,60.0,4,000
+Libram of Justice,2.0,1.7,57.3,4,000
+Chaos Strike,1.3,1.9,51.4,4,000
+Poison Seeds,1.6,1.7,54.9,3,900
+Innervate,1.3,1.8,52.5,3,900
+Sigil of Silence,1.0,1.8,39.4,3,900
+Polymorph,2.4,1.3,49.6,3,900
+Potion of Madness,2.8,1,60.1,3,900
+Kingsbane,1.1,1,56.0,3,900
+Twilight's Call,1.6,1.7,51.2,3,900
+Backfire,1.6,1.5,51.3,3,900
+Trampling Rhino,1.6,1.9,61.9,3,900
+Sludge Slurper,1.4,1.7,57.2,3,900
+Counterfeit Coin,1.1,1.7,48.8,3,800
+Open the Waygate,1.0,1,52.3,3,800
+Plot Twist,1.3,1.7,49.0,3,800
+Cult Neophyte,1.4,1.5,52.4,3,800
+Apotheosis,1.6,1.5,49.0,3,800
+Demonic Studies,1.2,1.6,45.2,3,800
+Learn Draconic,1.2,1.5,50.4,3,800
+Aldrachi Warblades,1.4,1.9,49.0,3,700
+Mortal Coil,1.3,1.6,48.5,3,700
+Fan of Knives,1.5,1.5,48.9,3,700
+Kanrethad Ebonlocke,1.9,1,57.1,3,700
+Foxy Fraud,1.2,1.7,51.7,3,700
+Lesser Diamond Spellstone,3.4,1.8,58.1,3,700
+Ice Barrier,1.3,1.4,48.1,3,700
+Seal of Champions,1.5,1.7,68.3,3,600
+Nitroboost Poison,1.5,1.8,52.5,3,600
+Sword Eater,1.8,1.7,58.0,3,600
+Smuggler's Run,1.1,2,68.4,3,600
+Astromancer Solarian,1.9,1,55.4,3,600
+Fallen Hero,1.3,1.7,53.7,3,600
+Eater of Secrets,3.0,1,52.7,3,600
+Living Roots,1.3,1.8,53.5,3,600
+Eye Beam,1.3,1.8,47.0,3,600
+Desk Imp,0.9,1.9,54.8,3,600
+Blink Fox,1.2,1.6,51.4,3,600
+Brawl,1.8,1.7,46.5,3,600
+Stonetusk Boar,1.1,1.9,59.4,3,600
+Raiding Party,1.3,1.8,57.5,3,600
+Eternium Rover,1.0,1.8,49.2,3,500
+Holy Smite,1.4,1.5,50.1,3,500
+Academic Espionage,1.8,1.5,50.3,3,500
+Never Surrender!,2.4,1.3,64.5,3,500
+Sky Raider,1.3,1.9,60.6,3,500
+Bloodreaver Gul'dan,4.3,1,57.1,3,500
+Eaglehorn Bow,1.9,1.6,59.5,3,500
+Consume Magic,1.8,1.6,53.0,3,500
+Circus Amalgam,1.4,1.7,47.8,3,500
+Wound Prey,1.4,1.9,60.0,3,500
+Valeera the Hollow,2.7,1,51.2,3,400
+Everyfin is Awesome,2.2,1.9,70.7,3,400
+Devolve,1.9,1.4,55.7,3,400
+Babbling Book,1.1,1.6,48.2,3,400
+Hallucination,1.1,1.5,49.0,3,400
+Kobold Sandtrooper,1.2,1.9,53.0,3,400
+Elven Minstrel,1.2,1.6,51.1,3,400
+Reno the Relicologist,2.2,1,58.5,3,300
+Scrapyard Colossus,3.8,1.6,56.6,3,300
+Shadow Word: Death,2.3,1.3,54.3,3,300
+Wild Pyromancer,1.2,1.8,52.6,3,300
+Ogremancer,1.5,1.6,55.6,3,300
+Rotten Applebaum,1.4,1.4,50.2,3,300
+Sir Finley Mrrgglton,2.1,1,59.1,3,300
+Firemancer Flurgl,2.4,1,70.3,3,300
+Divine Favor,3.0,1.3,64.4,3,300
+Potion of Illusion,2.5,1.2,54.3,3,300
+Spawn of Shadows,2.5,1,61.9,3,200
+Satyr Overseer,1.2,1.9,56.8,3,200
+Brawl,1.7,1.8,45.9,3,200
+Athletic Studies,1.0,1.8,49.1,3,200
+Holy Nova,1.5,1.4,50.7,3,200
+Sense Demons,1.4,1.3,55.5,3,200
+Crimson Sigil Runner,1.0,1.9,42.3,3,200
+Voidlord,3.4,1.3,58.4,3,200
+Malfurion the Pestilent,1.7,1,54.2,3,200
+Burning Blade Acolyte,1.2,1.7,44.0,3,200
+Starscryer,1.1,1.7,54.8,3,200
+Buccaneer,0.9,1.8,57.9,3,200
+Starfall,1.2,1.6,51.8,3,100
+Dead Ringer,1.0,1.7,51.7,3,100
+Free Admission,1.1,1.5,50.9,3,100
+Sludge Belcher,1.4,1.4,51.2,3,100
+Libram of Hope,1.5,1.8,58.5,3,100
+Snowflipper Penguin,0.9,1.9,56.1,3,100
+Ship's Cannon,1.2,1.9,66.4,3,100
+Mask of C'Thun,1.6,1.5,52.1,3,100
+Flame Imp,0.9,1.9,57.6,3,000
+Hog Rancher,0.8,1.9,43.1,3,000
+Beaming Sidekick,1.4,1.8,56.8,3,000
+Invigorating Sermon,0.8,1.8,44.9,3,000
+Umberwing,1.1,1.9,54.9,3,000
+Carnivorous Cube,1.6,1.7,53.7,3,000
+Embiggen,0.9,1.9,52.1,3,000
+Fury (Rank 1),1.2,1.9,52.0,3,000
+Witchwood Piper,1.3,1.4,46.0,3,000
+Righteous Protector,1.0,1.9,60.9,3,000
+Flare,1.6,1.4,50.5,2,900
+Wild Growth,1.0,1.9,41.0,2,900
+Nazmani Bloodweaver,0.8,1.7,46.0,2,900
+Obsidian Statue,2.9,1.3,55.6,2,900
+EVIL Quartermaster,1.0,1.7,48.2,2,900
+Silverleaf Poison,1.3,1.3,51.9,2,900
+Gift of Luminance,1.3,1.5,46.5,2,900
+Skulking Geist,2.0,1,51.4,2,900
+Shield Slam,1.1,1.8,45.9,2,900
+Mind Blast,1.7,1.7,54.1,2,900
+Sandstorm Elemental,1.2,1.5,50.2,2,900
+Grave Rune,1.6,1.5,49.5,2,900
+Blessing of Wisdom,1.7,1.2,61.1,2,900
+Ritual of Doom,1.0,1.9,51.7,2,900
+Overlord Runthak,2.0,1,51.2,2,900
+Flamestrike,1.9,1.4,50.7,2,900
+Avenge,1.4,1.7,54.9,2,900
+Sunscale Raptor,0.9,1.8,43.9,2,900
+Salhet's Pride,1.0,1.9,66.3,2,900
+Vicious Scalehide,1.3,1.9,63.4,2,800
+Doppelgangster,1.2,1.4,51.6,2,800
+Molten Reflection,0.9,1.8,51.5,2,800
+Gluttonous Ooze,2.1,1,51.7,2,800
+Piercing Shot,1.5,1.9,65.4,2,800
+Relentless Pursuit,1.3,1.7,53.4,2,800
+Forgotten Torch,1.1,1.6,53.3,2,800
+Cagematch Custodian,1.2,1.6,59.5,2,800
+Flesh Giant,0.9,1.8,56.0,2,800
+The Soularium,1.7,1,59.5,2,800
+Underbelly Fence,1.0,1.5,52.6,2,800
+Wicked Stab (Rank 1),1.0,1.7,54.7,2,800
+Supreme Archaeology,0.8,1,49.9,2,800
+Explosive Trap,1.5,1.5,53.6,2,800
+Glaivebound Adept,1.4,1.9,53.0,2,800
+Sethekk Veilweaver,1.0,1.5,49.3,2,800
+Eye Beam,1.2,1.8,54.7,2,800
+Shudderwock,2.4,1,50.0,2,800
+Moonfire,0.7,1.9,48.5,2,800
+Bazaar Burglary,0.8,1,48.5,2,800
+Ice Barrier,1.0,1.3,49.5,2,700
+Brightwing,1.6,1,48.4,2,700
+Jandice Barov,1.8,1,57.5,2,700
+Spirit of the Shark,1.0,1.4,45.3,2,700
+Sword and Board,0.9,1.8,45.3,2,700
+Skull of the Man'ari,1.4,1,59.9,2,700
+Nourish,1.0,1.8,52.6,2,700
+Injured Marauder,1.6,1.5,56.2,2,700
+Plague of Death,2.4,1.3,53.1,2,700
+Grim Rally,0.8,1.9,60.3,2,700
+Voracious Reader,1.8,1.8,59.7,2,700
+Pharaoh Cat,0.9,1.6,52.8,2,700
+Lesser Amethyst Spellstone,1.2,1.6,54.8,2,700
+Wisp,0.8,1.8,58.1,2,700
+Jade Spirit,0.8,1.9,51.1,2,600
+Darkglare,0.7,1.9,59.9,2,600
+Raid the Sky Temple,0.7,1,47.8,2,600
+Wandering Monster,1.2,1.5,58.2,2,600
+EVIL Cable Rat,0.9,1.7,52.2,2,600
+Blademaster Samuro,2.0,1,58.9,2,600
+Shadow Hunter Vol'jin,1.9,1,50.0,2,600
+Rally!,1.2,1.8,50.7,2,600
+Lord Godfrey,2.5,1,55.7,2,600
+Seal Fate,0.8,1.7,52.7,2,600
+Mirror Image,0.9,1.4,50.6,2,600
+Violet Spellwing,0.8,1.7,54.8,2,600
+Flame Imp,0.8,1.9,49.1,2,600
+Field Contact,0.8,1.7,49.8,2,600
+Tracking,1.3,1.5,53.2,2,600
+Mana Burn,1.0,1.8,55.6,2,600
+Cheat Death,1.1,1.4,46.8,2,600
+Northwatch Commander,1.1,1.9,54.9,2,500
+Soul Mirror,2.1,1,54.0,2,500
+Disciple of Galakrond,0.7,1.7,53.7,2,500
+Frost Lich Jaina,2.1,1,51.8,2,500
+Felfire Deadeye,0.9,1.7,55.4,2,500
+Tuskpiercer,0.8,1.9,47.9,2,500
+Dwarven Sharpshooter,1.4,1.5,54.6,2,500
+Bogbeam,0.7,1.9,51.2,2,500
+Lost in the Jungle,1.1,1.9,63.3,2,500
+Vanessa VanCleef,1.6,1,49.0,2,500
+Serpentshrine Portal,1.1,1.7,55.8,2,500
+Soulciologist Malicia,1.8,1,50.8,2,500
+Outrider's Axe,1.2,1.7,58.3,2,500
+Wrenchcalibur,0.7,1.8,55.2,2,500
+Breath of Dreams,0.8,1.8,49.5,2,500
+Shadowed Spirit,0.9,1.9,49.6,2,500
+Plagiarize,1.1,1.3,48.5,2,500
+Muster for Battle,1.2,1.9,63.5,2,500
+Fungal Fortunes,0.9,1.9,50.8,2,500
+Felosophy,1.0,1.5,46.4,2,500
+Tamsin Roame,1.6,1,50.4,2,400
+Gibberling,1.0,2,62.2,2,400
+Sigil of Flame,0.8,1.6,41.6,2,400
+Lord Jaraxxus,2.0,1,53.0,2,400
+Guess the Weight,0.9,1.6,50.5,2,400
+Praise Galakrond!,0.8,1.7,53.0,2,400
+Blazing Battlemage,1.1,1.7,53.3,2,400
+Fire Fly,0.8,1.7,53.8,2,400
+Yogg-Saron, Master of Fate,2.6,1,50.2,2,400
+Consecration,1.1,1.7,56.2,2,400
+Imprisoned Phoenix,0.8,1.7,49.2,2,400
+Sylvanas Windrunner,2.0,1,51.5,2,400
+Grumble, Worldshaker,1.4,1,48.7,2,400
+Arcane Shot,1.1,1.9,58.6,2,400
+Sightless Watcher,0.7,1.9,59.6,2,400
+Fire Breather,1.1,1.3,53.1,2,400
+Unstable Felbolt,1.0,1.4,53.3,2,400
+Lord Barov,2.3,1,52.8,2,400
+Doomguard,1.5,1.8,60.2,2,400
+Nightshade Matron,1.1,1.9,61.6,2,300
+Upgrade!,1.2,1.7,59.9,2,300
+Leeroy Jenkins,3.4,1,61.9,2,300
+Educated Elekk,1.0,1.3,41.7,2,300
+Twisted Knowledge,0.8,1.6,44.6,2,300
+Arbor Up,1.1,1.9,57.1,2,300
+Wax Elemental,0.9,1.9,37.9,2,300
+Righteous Cause,0.9,1.9,63.3,2,300
+Corsair Cache,0.9,1.6,48.4,2,300
+Ironbark,0.7,1.8,45.0,2,300
+Flik Skyshiv,1.6,1,52.1,2,300
+Annoy-o-Tron,0.9,1.8,41.7,2,300
+Minefield,0.9,1.6,48.2,2,300
+Pressure Plate,1.4,1.3,57.4,2,300
+Argent Horserider,0.8,1.9,72.5,2,300
+Explosive Trap,1.4,1.5,55.9,2,300
+Arcane Amplifier,1.0,1.4,52.7,2,300
+Inconspicuous Rider,1.0,1.4,57.1,2,300
+Toxic Reinforcements,1.0,1.7,55.8,2,300
+Hellfire,1.2,1.4,52.2,2,300
+Goody Two-Shields,1.0,1.8,56.7,2,200
+Lightning Storm,1.0,1.6,46.4,2,200
+Scrap Golem,1.0,1.7,45.1,2,200
+Rinling's Rifle,1.7,1,64.3,2,200
+Warsong Wrangler,1.0,1.8,59.4,2,200
+Cascading Disaster,2.8,1.5,55.4,2,200
+Selective Breeder,0.8,1.7,49.0,2,200
+Glowstone Technician,0.9,1.8,71.7,2,200
+Lowly Squire,0.8,2,59.5,2,200
+Bladestorm,1.0,1.6,48.6,2,200
+Holy Nova,1.1,1.5,48.8,2,200
+Reliquary of Souls,1.1,1,50.3,2,200
+Ur'zul Horror,0.7,1.9,57.4,2,200
+Ragnaros the Firelord,2.3,1,50.3,2,200
+Twilight Drake,1.0,1.3,53.0,2,200
+Daring Escape,1.2,1.8,56.7,2,200
+Illidari Felblade,0.9,1.9,59.6,2,200
+Cobalt Spellkin,1.4,1.4,46.3,2,200
+Combustion,1.0,1.5,53.8,2,200
+Radiant Elemental,0.8,1.6,50.0,2,200
+Springpaw,0.7,1.8,47.1,2,200
+EVIL Totem,0.9,1.7,57.6,2,200
+Shadowjeweler Hanar,1.2,1,48.1,2,200
+Claw Machine,1.1,1.5,48.8,2,200
+Overflow,1.2,1.6,52.3,2,200
+Hex,1.1,1.5,51.5,2,200
+Mana Cyclone,0.9,1.5,55.3,2,200
+Blackjack Stunner,0.8,1.6,49.5,2,100
+Mountain Giant,0.8,1.6,55.3,2,100
+Flash of Light,0.7,1.8,43.0,2,100
+Bluegill Warrior,0.9,1.7,56.6,2,100
+Deathstalker Rexxar,1.8,1,55.8,2,100
+Acidic Swamp Ooze,1.4,1.2,50.6,2,100
+Catrina Muerte,2.0,1,52.0,2,100
+Jade Behemoth,0.6,1.9,50.4,2,100
+Oasis Ally,1.0,1.3,59.2,2,100
+Cone of Cold,0.8,1.7,44.0,2,100
+Marrowslicer,0.8,1.8,48.0,2,100
+Stitched Tracker,1.0,1.4,55.4,2,100
+Thorngrowth Sentries,0.8,1.9,45.9,2,100
+Wrathscale Naga,0.8,1.9,57.8,2,100
+Old Murk-Eye,2.3,1,67.9,2,100
+Wriggling Horror,0.9,1.7,59.7,2,100
+Varden Dawngrasp,1.6,1,57.3,2,100
+Keywarden Ivory,1.5,1,49.6,2,100
+Spirit of the Dragonhawk,0.9,1.6,58.4,2,100
+N'Zoth's First Mate,1.0,1.9,63.5,2,100
+Shield Slam,0.9,1.8,45.8,2,000
+Warpath,0.9,1.6,50.4,2,000
+Aranasi Broodmother,1.2,1.6,49.8,2,000
+Firebrand,0.8,1.5,56.3,2,000
+Flamestrike,1.3,1.3,49.9,2,000
+Tome of Intellect,0.7,1.5,47.9,2,000
+Fogsail Freebooter,0.9,1.8,64.8,2,000
+Mana Tide Totem,0.8,1.6,49.1,2,000
+Youthful Brewmaster,1.1,1.6,48.8,2,000
+Psychopomp,0.8,1.7,49.8,2,000
+Bone Wraith,0.9,1.5,48.0,2,000
+Stage Dive,0.7,1.7,52.1,2,000
+Lab Partner,0.6,1.7,55.9,2,000
+Freezing Trap,1.1,1.6,53.1,2,000
+Armorsmith,0.7,1.8,41.4,2,000
+Frightened Flunky,0.6,1.7,48.5,2,000
+Felstalker,0.7,1.9,58.6,2,000
+Town Crier,0.7,1.5,54.3,2,000
+Skybarge,0.9,2,68.0,2,000
+Lushwater Murcenary,0.9,1.7,67.4,2,000
+Malygos the Spellweaver,2.1,1,49.7,2,000
+Guardian Augmerchant,1.0,1.6,53.1,2,000
+Sandhoof Waterbearer,0.9,1.5,48.9,2,000
+Tenwu of the Red Smoke,1.4,1,53.6,1,900
+Swashburglar,0.6,1.6,52.9,1,900
+Acidic Swamp Ooze,1.4,1.1,48.5,1,900
+Kronx Dragonhoof,1.8,1,54.0,1,900
+Siamat,1.7,1,52.9,1,900
+The Lich King,2.0,1,52.2,1,900
+Pogo-Hopper,0.3,1.9,44.2,1,900
+Bonechewer Brawler,0.8,1.7,48.3,1,900
+Gadgetzan Auctioneer,0.6,1.8,49.9,1,900
+Unleash the Hounds,1.7,1.5,56.9,1,900
+Madame Lazul,1.1,1,54.8,1,900
+Rising Winds,0.6,1.7,50.0,1,900
+Malygos,1.5,1,54.3,1,900
+Fire Plume's Heart,0.6,1,44.3,1,900
+Sayge, Seer of Darkmoon,2.5,1,68.5,1,900
+Plated Beetle,0.6,1.5,50.9,1,900
+Double Jump,0.6,1.6,43.7,1,900
+Duplicate,0.9,1.3,56.9,1,900
+Starving Buzzard,0.7,1.7,49.1,1,900
+Bladed Lady,0.8,1.9,55.7,1,900
+Razorboar,0.6,2,42.5,1,900
+Power of Creation,1.1,1.3,54.3,1,900
+Survival of the Fittest,0.9,1.6,52.2,1,900
+Untapped Potential,0.5,1,48.7,1,900
+Gadgetzan Auctioneer,0.7,1.8,40.7,1,900
+Diving Gryphon,0.7,1.6,52.0,1,900
+Ice Walker,0.9,1.5,58.2,1,900
+Into the Fray,0.6,1.8,42.8,1,900
+Mana Tide Totem,0.8,1.6,56.1,1,900
+Baleful Banker,1.0,1.2,46.1,1,800
+Dreadlord's Bite,0.8,1.9,62.8,1,800
+Hagatha's Scheme,1.2,1.4,50.2,1,800
+Tess Greymane,1.7,1,50.5,1,800
+Chillblade Champion,0.9,1.9,71.7,1,800
+Lightshower Elemental,1.0,1.3,52.9,1,800
+Illidari Inquisitor,1.1,1.7,53.8,1,800
+Risky Skipper,0.7,1.8,47.5,1,800
+Luna's Pocket Galaxy,1.4,1,57.7,1,800
+Blessing of Authority,1.2,1.6,59.7,1,800
+Flurry (Rank 1),0.7,1.5,47.6,1,800
+Shadow Word: Horror,1.4,1.2,59.4,1,800
+Mordresh Fire Eye,1.8,1,54.9,1,800
+Netherspite Historian,0.7,1.5,51.1,1,800
+Healing Rain,1.0,1.4,49.5,1,800
+Immolation Aura,0.8,1.6,45.5,1,800
+The Amazing Reno,2.0,1,55.8,1,800
+Germination,1.0,1.4,51.4,1,800
+Firetree Witchdoctor,0.7,1.4,51.5,1,800
+Spirit of the Dead,0.8,1.4,46.4,1,800
+Jade Claws,0.5,1.9,53.9,1,800
+Kor'vas Bloodthorn,0.7,1,40.7,1,800
+Headhunter's Hatchet,1.0,1.5,58.9,1,800
+Peon,0.6,1.8,41.6,1,700
+Captain's Parrot,0.6,1.9,66.1,1,700
+Dr. Boom, Mad Genius,1.2,1,49.7,1,700
+Daring Fire-Eater,0.7,1.5,54.0,1,700
+Tiny Knight of Evil,0.6,1.9,58.9,1,700
+Grimscale Oracle,0.8,1.7,59.3,1,700
+Despicable Dreadlord,0.9,1.3,54.5,1,700
+Molten Giant,0.6,1.9,55.1,1,700
+Twisting Nether,1.7,1.2,53.4,1,700
+Imp Swarm (Rank 1),0.6,1.9,35.5,1,700
+Coldlight Seer,1.0,1.6,66.5,1,700
+Twig of the World Tree,0.8,1,53.6,1,700
+Galakrond, the Unspeakable,1.4,1,52.1,1,700
+Earthen Scales,0.6,1.8,46.7,1,700
+Aldrachi Warblades,0.8,1.7,50.3,1,700
+Bloodsail Deckhand,0.7,1.9,64.2,1,700
+Scabbs Cutterbutter,0.8,1,48.2,1,700
+Razorfen Beastmaster,0.6,1.9,44.5,1,700
+Pack Tactics,1.3,1.3,55.4,1,700
+Ticket Master,0.5,1.8,47.6,1,700
+Teacher's Pet,0.9,1.5,52.0,1,700
+Murloc Tastyfin,0.9,1.3,54.8,1,700
+Ancestral Knowledge,0.7,1.4,49.9,1,700
+Bloodsail Cultist,0.9,2,67.7,1,700
+Coordinated Strike,0.6,1.9,60.3,1,700
+Brittlebone Destroyer,0.9,1.4,51.2,1,700
+Jepetto Joybuzz,1.2,1,51.7,1,700
+Overconfident Orc,0.9,1.7,33.5,1,700
+Sightless Watcher,0.6,1.8,44.8,1,700
+Knife Juggler,0.7,1.7,55.8,1,600
+Emerald Explorer,0.7,1.8,52.1,1,600
+Power of the Wild,0.7,1.9,59.0,1,600
+Cat Trick,0.9,1.4,62.5,1,600
+Power Overwhelming,0.8,1.6,54.8,1,600
+Mark of the Lotus,0.7,1.9,60.5,1,600
+Ysera, Unleashed,1.3,1,55.2,1,600
+Dyn-o-matic,0.8,1.6,44.4,1,600
+Spymistress,0.5,1.8,51.5,1,600
+Shiv,0.6,1.5,42.0,1,600
+Freezing Trap,1.1,1.4,54.9,1,600
+Potion of Polymorph,0.9,1.2,56.5,1,600
+Arcane Artificer,0.6,1.4,48.2,1,600
+Mystery Winner,0.8,1.3,58.7,1,600
+Clockwork Goblin,0.5,1.9,48.1,1,600
+Galloping Savior,1.0,1.6,58.3,1,600
+Time Rip,0.7,1.5,51.9,1,600
+Galvanizer,0.6,1.9,47.5,1,600
+Infested Goblin,0.6,1.8,42.2,1,600
+Brrrloc,0.6,1.4,53.9,1,600
+Winged Guardian,0.6,1.8,50.8,1,600
+Quartermaster,0.8,1.9,68.8,1,600
+Guardian Animals,0.6,1.9,54.6,1,600
+Archmage Antonidas,1.1,1,50.8,1,600
+Runic Egg,0.4,1.7,58.1,1,600
+Boneweb Egg,1.4,1.9,62.6,1,600
+Vulpera Scoundrel,0.7,1.3,44.7,1,600
+Stiltstepper,0.8,1.9,62.4,1,600
+Youthful Brewmaster,0.9,1.5,54.8,1,600
+Kargath Bladefist,0.8,1,52.5,1,600
+Y'Shaarj, the Defiler,2.1,1,54.8,1,600
+Carnival Barker,0.8,1.9,62.7,1,600
+Wild Growth,0.5,1.6,51.2,1,600
+Malygos, Aspect of Magic,1.1,1,58.8,1,600
+Alexstrasza,1.8,1,54.2,1,600
+Book of Specters,0.7,1.4,57.8,1,500
+Arcane Giant,0.6,1.7,53.2,1,500
+Coldarra Drake,1.0,1.7,55.0,1,500
+Confection Cyclone,0.6,1.7,51.8,1,500
+Condemn (Rank 1),0.8,1.4,50.3,1,500
+Gan'arg Glaivesmith,0.6,1.9,46.4,1,500
+Yogg-Saron, Hope's End,1.8,1,50.8,1,500
+Tame Beast (Rank 1),0.7,1.7,49.9,1,500
+Mind Vision,0.6,1.4,46.4,1,500
+Unite the Murlocs,0.4,1,66.2,1,500
+Garrison Commander,0.7,1.6,60.4,1,500
+Silence,0.8,1.2,50.6,1,500
+Zixor, Apex Predator,1.0,1,52.5,1,500
+Kobold Stickyfinger,1.5,1,50.1,1,500
+Knife Vendor,1.2,1.6,63.9,1,500
+Battle Rage,0.7,1.7,46.3,1,500
+Forbidden Words,1.0,1.2,55.5,1,500
+Doctor Krastinov,1.1,1,54.2,1,500
+Idol of Y'Shaarj,1.0,1.3,59.1,1,500
+Mo'arg Artificer,0.7,1.4,56.3,1,500
+Carrion Studies,0.6,1.7,48.8,1,500
+Consecration,0.7,1.6,52.3,1,500
+Stonemaul Anchorman,0.6,1.6,47.8,1,500
+Desperate Prayer,0.6,1.7,46.3,1,500
+Crackling Razormaw,0.5,1.8,56.8,1,500
+Psychic Conjurer,0.5,1.7,48.7,1,500
+Man'ari Mosher,0.6,1.8,53.1,1,500
+Lightforged Zealot,0.5,1.9,65.2,1,500
+Ancharrr,1.3,1,59.3,1,500
+Command the Illidari,0.8,1.8,59.0,1,500
+Siphon Soul,0.8,1.2,52.6,1,500
+King Togwaggle,0.8,1,52.1,1,500
+Volcano,0.8,1.3,49.9,1,500
+Azure Drake,0.8,1.4,50.6,1,500
+Flanking Strike,0.8,1.5,58.4,1,500
+Power of the Wild,0.6,1.9,58.6,1,500
+Meanstreet Marshal,0.6,1.4,70.9,1,500
+Redscale Dragontamer,0.5,1.7,52.5,1,500
+Undertaker,0.5,2,58.8,1,500
+Duskbreaker,0.7,1.5,52.8,1,500
+Steward of Scrolls,0.7,1.6,41.2,1,400
+Totemic Might,0.5,1.9,65.0,1,400
+Entomb,1.2,1.2,52.7,1,400
+Flametongue Totem,0.6,1.8,60.9,1,400
+Arcane Keysmith,0.7,1.2,54.9,1,400
+Kun the Forgotten King,1.1,1,51.8,1,400
+Galakrond, the Nightmare,1.1,1,51.6,1,400
+Lightning Bolt,0.6,1.9,43.4,1,400
+Derailed Coaster,0.8,1.8,60.9,1,400
+Tundra Rhino,0.8,1.7,50.0,1,400
+Psyche Split,0.8,1.4,50.0,1,400
+Mindrender Illucia,2.1,1,58.6,1,400
+Dreaming Drake,0.5,1.8,48.7,1,400
+Augmented Elekk,0.7,1.5,46.0,1,400
+Hoard Pillager,1.1,1.5,55.0,1,400
+Platebreaker,1.2,1.4,40.5,1,400
+Deck of Lunacy,0.8,1,48.1,1,400
+Faceless Corruptor,0.8,1.4,55.5,1,400
+Void Drinker,0.5,1.6,47.0,1,400
+Earth Revenant,0.6,1.5,49.9,1,400
+Greater Healing Potion,1.3,1.2,52.7,1,400
+Aya Blackpaw,0.9,1,52.6,1,400
+Embalming Ritual,0.6,1.6,45.7,1,400
+Abyssal Summoner,0.6,1.3,54.7,1,400
+Slam,0.5,1.8,41.5,1,400
+Depth Charge,0.5,1.8,39.0,1,400
+Totemic Surge,0.5,1.9,65.4,1,400
+Blessing of Might,0.7,1.8,53.3,1,400
+Pilfer,0.5,1.5,47.1,1,400
+Kolkar Pack Runner,0.6,1.8,64.7,1,400
+Crystalline Oracle,0.5,1.4,50.6,1,400
+SN1P-SN4P,1.1,1,52.8,1,400
+Dragonbane,1.2,1,62.6,1,400
+Reckoning,0.7,1.5,40.4,1,400
+Dire Frenzy,0.8,1.6,48.4,1,400
+Twilight Runner,0.7,1.8,54.3,1,400
+Shooting Star,0.5,1.7,49.3,1,400
+Azure Explorer,0.7,1.2,52.1,1,400
+Snipe,0.8,1.3,56.9,1,400
+Murgur Murgurgle,0.9,1,58.5,1,400
+Necrium Blade,0.4,1.8,52.4,1,400
+Rolling Fireball,0.8,1.2,52.7,1,400
+Lightning Storm,0.7,1.3,51.1,1,400
+Drakonid Operative,0.6,1.5,52.9,1,300
+Arcane Breath,0.7,1.1,53.9,1,300
+Conditioning (Rank 1),0.5,1.8,55.1,1,300
+Elemental Evocation,0.5,1.7,53.7,1,300
+Alleycat,0.6,1.8,51.7,1,300
+Bog Slosher,0.7,1.4,50.2,1,300
+Soothsayer's Caravan,0.5,1.6,44.3,1,300
+Conjurer's Calling,0.9,1.1,52.5,1,300
+Menacing Nimbus,0.5,1.7,46.1,1,300
+Licensed Adventurer,0.4,1.5,56.9,1,300
+Oasis Surger,0.5,1.8,52.4,1,300
+Psychic Conjurer,0.5,1.4,51.1,1,300
+Omega Assembly,0.7,1.8,44.7,1,300
+Trueaim Crescent,0.8,1.5,50.1,1,300
+Carnival Clown,1.0,1.6,48.3,1,300
+Acrobatics,0.6,1.6,50.8,1,300
+Tortollan Pilgrim,1.1,1.1,59.3,1,300
+Scrap Shot,0.7,1.8,58.0,1,300
+Ambush,0.6,1.4,48.7,1,300
+Firelands Portal,0.7,1.5,51.8,1,300
+Petting Zoo,0.8,1.3,59.0,1,300
+Deadly Shot,0.8,1.6,49.6,1,300
+Darkbomb,0.6,1.3,50.6,1,300
+Mind Control Tech,0.9,1.2,48.3,1,300
+BEEEES!!!,0.5,1.7,49.8,1,300
+Altar of Fire,0.6,1.4,31.7,1,300
+Thickhide Kodo,0.5,1.7,46.8,1,300
+Primordial Protector,0.8,1.4,51.5,1,300
+Barista Lynchen,1.4,1,53.2,1,300
+Shieldbearer,0.5,1.9,30.7,1,300
+Savage Roar,0.9,1.8,59.8,1,300
+Direhorn Hatchling,0.8,1.8,42.2,1,300
+Ysera the Dreamer,2.1,1,45.6,1,300
+Kabal Courier,0.6,1.1,53.1,1,300
+Soulshard Lapidary,0.6,1.9,46.4,1,300
+Hecklebot,0.6,1.6,45.9,1,300
+Candleshot,0.7,1.5,53.4,1,300
+Southsea Captain,0.6,1.9,64.3,1,300
+Big Ol' Whelp,0.9,1.4,51.1,1,300
+Earthquake,0.8,1.3,49.7,1,300
+Renowned Performer,0.5,1.8,52.5,1,300
+Cabalist's Tome,0.6,1.4,50.1,1,300
+Altruis the Outcast,1.0,1,55.4,1,300
+Archwitch Willow,0.9,1,60.3,1,300
+Tiny Knight of Evil,0.3,2,60.0,1,300
+Play Dead,0.7,1.6,46.9,1,300
+Mal'Ganis,2.1,1,59.3,1,300
+Spectral Sight,0.5,1.5,44.1,1,200
+Puzzle Box of Yogg-Saron,1.4,1.1,55.9,1,200
+Aegwynn, the Guardian,0.8,1,48.7,1,200
+Baku the Mooneater,4.1,1,50.9,1,200
+Anubisath Defender,0.4,1.7,55.4,1,200
+War Cache,0.5,1.7,43.3,1,200
+Noble Sacrifice,0.7,1.6,54.4,1,200
+Lesser Emerald Spellstone,0.7,1.6,61.3,1,200
+Soldier's Caravan,0.5,1.7,48.1,1,200
+Crystal Power,0.4,1.7,39.8,1,200
+Totemic Reflection,0.5,1.8,63.0,1,200
+Yoink!,0.4,1.4,37.6,1,200
+Hemet, Jungle Hunter,0.6,1,53.4,1,200
+Dragonfire Potion,1.0,1.1,52.6,1,200
+Cataclysm,0.7,1.1,59.1,1,200
+Faceless Manipulator,0.7,1.3,50.1,1,200
+Sinister Strike,0.5,1.8,46.7,1,200
+Cloning Device,0.5,1.2,52.3,1,200
+Faerie Dragon,0.6,1.5,49.1,1,200
+Heistbaron Togwaggle,1.0,1,53.0,1,200
+Beckoner of Evil,0.4,1.7,40.8,1,200
+Oasis Thrasher,0.5,1.8,51.6,1,200
+Trick Totem,0.5,1.4,53.2,1,200
+Totem Golem,0.5,1.9,60.7,1,200
+Midway Maniac,0.4,1.7,50.3,1,200
+Devout Pupil,0.5,1.7,60.6,1,200
+Rapid Fire,0.5,1.7,40.7,1,200
+Sacrificial Pact,0.6,1.7,39.2,1,200
+Shotbot,0.4,1.8,61.0,1,200
+Malevolent Strike,0.4,1.7,50.5,1,200
+Execute,0.6,1.8,43.3,1,200
+Circus Medic,0.6,1.5,51.0,1,200
+Gyreworm,0.5,1.8,55.1,1,200
+Drain Soul,0.4,1.6,55.9,1,200
+Nerubian Egg,0.4,1.9,42.3,1,200
+Mechwarper,0.4,1.9,53.6,1,200
+Kindling Elemental,0.5,1.7,45.6,1,200
+Hex,0.7,1.5,47.1,1,200
+Disciple of C'Thun,0.4,1.6,41.8,1,200
+Corrupt Elementalist,0.5,1.7,53.4,1,200
+Faceless Manipulator,0.7,1.2,55.3,1,200
+Fishy Flyer,0.7,1.5,56.1,1,200
+Snap Freeze,0.4,1.6,39.3,1,200
+Warglaives of Azzinoth,0.7,1.7,46.1,1,200
+Felscream Blast,0.5,1.6,50.8,1,200
+Guidance,0.5,1.6,45.5,1,200
+Cleric of Scales,0.4,1.6,51.4,1,200
+Maelstrom Portal,0.6,1.5,54.7,1,200
+Evasive Wyrm,0.7,1.4,52.1,1,200
+Cinderstorm,0.5,1.5,47.2,1,100
+Floop's Glorious Gloop,0.6,1,49.7,1,100
+Xyrella,0.9,1,50.6,1,100
+Spellbreaker,0.9,1.2,53.9,1,100
+Shadowlight Scholar,0.4,1.7,49.7,1,100
+Webspinner,0.5,1.8,41.5,1,100
+Warhorse Trainer,0.5,1.9,64.5,1,100
+Sky Gen'ral Kragg,0.7,1,51.5,1,100
+Silas Darkmoon,1.5,1,46.4,1,100
+Bloodsail Corsair,0.5,1.8,60.1,1,100
+Crossroads Watch Post,0.6,1.4,47.8,1,100
+Southsea Captain,0.5,2,68.3,1,100
+Shimmering Tempest,0.4,1.5,49.3,1,100
+Zul'Drak Ritualist,0.7,1.3,53.4,1,100
+Strength in Numbers,0.3,1.8,52.3,1,100
+Marked Shot,0.7,1.3,55.5,1,100
+Keli'dan the Breaker,0.9,1,54.7,1,100
+Earth Shock,0.6,1.3,50.6,1,100
+Edwin VanCleef,0.8,1,55.1,1,100
+Gold Road Grunt,0.5,1.8,38.3,1,100
+Splitting Axe,0.5,1.8,65.5,1,100
+Secretkeeper,0.5,1.6,55.1,1,100
+Death Speaker Blackthorn,0.7,1,50.6,1,100
+Circle of Healing,0.5,1.6,44.7,1,100
+Priestess of Fury,0.7,1.6,52.7,1,100
+Mirror Entity,0.4,1.6,47.4,1,100
+Frizz Kindleroost,0.6,1,51.1,1,100
+Glowfly Swarm,0.5,1.9,60.6,1,100
+Cariel Roame,0.7,1,58.6,1,100
+Chaos Gazer,0.4,1.5,47.6,1,100
+Stowaway,0.5,1.7,49.0,1,100
+Master's Call,0.5,1.7,44.7,1,100
+Dancing Swords,0.3,1.6,46.6,1,100
+Goldshire Footman,0.5,1.8,29.5,1,100
+Shadow Madness,0.7,1.1,51.9,1,100
+Crossroads Gossiper,0.5,1.8,60.6,1,100
+Patches the Pirate,2.1,1,63.3,1,100
+Uther of the Ebon Blade,0.7,1,52.1,1,100
+Dead Man's Hand,0.6,1.5,49.8,1,100
+Ironbeak Owl,0.9,1.1,47.1,1,100
+Arcane Golem,0.8,1.7,58.4,1,100
+Arcane Explosion,0.5,1.5,48.7,1,100
+Rokara,0.7,1,64.6,1,100
+Whack-A-Gnoll Hammer,0.4,1.8,63.6,1,100
+Sandbinder,0.5,1.2,49.8,1,100
+Sneaky Delinquent,0.4,1.8,49.2,1,100
+Time Out!,0.5,1.7,51.5,1,100
+Spikeridged Steed,0.5,1.4,51.4,1,100
+Kalecgos,1.1,1,55.2,1,100
+Deep Freeze,0.7,1.3,50.5,1,000
+Blessing of Kings,0.5,1.6,56.8,1,000
+Shadow Bolt,0.6,1.3,45.1,1,000
+Felfin Navigator,0.6,1.6,64.0,1,000
+Ring Matron,0.5,1.5,47.4,1,000
+Spiritsinger Umbra,0.8,1,51.2,1,000
+Raging Felscreamer,0.5,1.7,46.3,1,000
+Timber Wolf,0.5,1.7,53.3,1,000
+Jan'alai, the Dragonhawk,1.0,1,53.7,1,000
+Elemental Allies,0.3,1.7,55.1,1,000
+Air Raid,0.5,1.6,55.6,1,000
+Hydrologist,0.4,1.7,51.1,1,000
+Bazaar Mugger,0.5,1.4,50.4,1,000
+Dunk Tank,0.5,1.6,49.5,1,000
+Cairne Bloodhoof,1.0,1,44.9,1,000
+Bulk Up,0.4,1.7,43.8,1,000
+Skeletal Dragon,0.7,1.2,49.5,1,000
+Hammer of the Naaru,0.6,1.6,62.4,1,000
+Piloted Shredder,0.5,1.5,52.5,1,000
+Dragoncaster,0.9,1,58.8,1,000
+Iron Hide,0.3,1.8,37.9,1,000
+Ashtongue Battlelord,0.5,1.8,38.2,1,000
+Sharkfin Fan,0.5,1.7,63.3,1,000
+Hunter's Mark,0.6,1.6,50.0,1,000
+Secret Plan,0.4,1.6,51.6,1,000
+Hench-Clan Hogsteed,0.4,1.6,52.9,1,000
+Pounce,0.2,1.9,49.1,1,000
+SI:7 Agent,0.4,1.6,43.4,1,000
+Restless Mummy,0.3,1.5,48.9,1,000
+Kurtrus Ashfallen,0.5,1,51.0,1,000
+Starfire,0.4,1.5,56.2,1,000
+Mecha'thun,1.2,1,55.8,1,000
+Fal'dorei Strider,0.3,1.8,53.4,1,000
+Mirror Entity,0.4,1.3,50.4,1,000
+Pack Kodo,0.4,1.4,56.4,1,000
+Bloodlust,0.9,1.5,62.3,1,000
+Flash Heal,0.5,1.6,42.6,1,000
+Scavenging Hyena,0.4,1.8,49.5,1,000
+Imprisoned Scrap Imp,0.3,1.6,42.2,1,000
+Deadly Shot,0.6,1.4,55.7,1,000
+Scalerider,0.5,1.3,50.4,1,000
+Hench-Clan Thug,0.5,1.9,49.6,1,000
+Cenarion Ward,0.5,1.6,47.9,1,000
+Murloc Tidehunter,0.4,1.7,60.3,1,000
+Transfer Student,0.5,1.3,52.4,1,000
+Boggspine Knuckles,0.3,1.8,60.6,1,000
+Blood Razor,0.4,1.5,48.0,1,000
+Frost Giant,0.4,1.8,61.0,1,000
+Rat Trap,0.6,1.1,60.2,990
+Imprisoned Satyr,0.3,1.6,48.6,990
+Devouring Plague,0.4,1.4,51.2,990
+Vilespine Slayer,0.5,1.4,53.6,990
+Murozond the Infinite,0.9,1,53.2,990
+Coldlight Seer,0.5,1.8,63.5,990
+Undercity Huckster,0.4,1.5,50.6,990
+Hellfire,0.6,1.3,50.9,990
+Treenforcements,0.3,1.8,39.9,980
+Pursuit of Justice,0.4,1.7,51.0,980
+Bearshark,0.5,1.8,45.7,980
+Unstable Portal,0.4,1.6,46.5,980
+Spirit Bomb,0.4,1.5,48.8,970
+Azalina Soulthief,0.7,1,54.3,970
+Primalfin Lookout,0.5,1.6,61.9,970
+Blade Dance,0.6,1.7,49.4,970
+Evasive Drakonid,0.8,1.6,41.7,970
+Archbishop Benedictus,1.0,1,50.5,970
+Prince Keleseth,0.5,1,52.0,970
+Crimson Sigil Runner,0.4,1.8,46.0,970
+Shardshatter Mystic,0.5,1.8,48.8,960
+Dragonblight Cultist,0.3,1.9,54.6,960
+Glow-Tron,0.3,1.9,51.9,960
+Runaway Blackwing,1.0,1.5,46.0,960
+Icicle,0.3,1.6,57.5,950
+Murloc Tinyfin,0.4,1.9,70.5,950
+Barkskin,0.2,1.8,39.8,950
+Blood Shard Bristleback,0.3,1.7,49.9,950
+Warhorse Trainer,0.5,2,60.6,950
+Lady Liadrin,1.3,1,57.7,950
+Babbling Book,0.3,1.5,50.4,950
+Coordinated Strike,0.4,1.9,40.1,950
+Captain Greenskin,0.7,1,56.7,950
+Invocation of Frost,0.3,1.8,52.6,950
+Fishflinger,0.4,1.7,62.0,950
+Dark Pact,0.5,1.7,50.7,940
+Novice Zapper,0.3,1.9,42.0,940
+Living Seed (Rank 1),0.4,1.5,44.8,930
+Hidden Oasis,0.4,1.7,49.5,930
+Gruntled Patron,0.4,1.8,36.8,930
+Inner Rage,0.4,1.9,41.9,930

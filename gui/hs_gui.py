@@ -33,6 +33,9 @@ def analyze_card(mana, name, attack, health, text_box):
 def analyze_deck():
     return
 
+def analyze_random_deck():
+    return
+
 def analyze_generated():
     return
     
@@ -49,13 +52,21 @@ def deck_page():
     button_deck.place(x=5, y=465)
     button_deck.configure(font=fontExample)
     
-    button_card = Button(root, text="Single Card Check", command=card_page)
-    button_card.place(x=180, y=465)
+    button_random = Button(root, text="Analyze Random Deck", command=analyze_random_deck)
+    button_random.place(x=172, y=20)
+    button_random.configure(font=fontExample)
+    
+    button_card = Button(root, text="Single Card Check", bg='#567', fg='White', command=card_page)
+    button_card.place(x=185, y=465)
     button_card.configure(font=fontExample)
     
-    button_generate = Button(root, text="Generate A Card", command=generate_page)
+    button_generate = Button(root, text="Generate A Card", bg='#567', fg='White', command=generate_page)
     button_generate.place(x=382, y=465)
     button_generate.configure(font=fontExample)
+    
+    text_box = Text(root, height=20, width=25)
+    text_box.place(x=160,y=120)
+    text_box.configure(font=fontExample)
     
 def card_page():
     global my_label
@@ -92,7 +103,7 @@ def card_page():
     health.configure(font=fontExample)
     text_box.configure(font=fontExample)
     
-    button_deck = Button(root, text="Check Deck List", command=deck_page)
+    button_deck = Button(root, text="Check Deck List", bg='#567', fg='White', command=deck_page)
     button_deck.place(x=5, y=465)
     button_deck.configure(font=fontExample)
     
@@ -101,7 +112,7 @@ def card_page():
     button_card.place(x=200, y=465)
     button_card.configure(font=fontExample)
     
-    button_generate = Button(root, text="Generate A Card", command=generate_page)
+    button_generate = Button(root, text="Generate A Card", bg='#567', fg='White', command=generate_page)
     button_generate.place(x=382, y=465)
     button_generate.configure(font=fontExample)
 
@@ -114,11 +125,11 @@ def generate_page():
     my_label = Label(root, image=my_img4)
     my_label.pack()
     
-    button_deck = Button(root, text="Check Deck List", command=deck_page)
+    button_deck = Button(root, text="Check Deck List", bg='#567', fg='White', command=deck_page)
     button_deck.place(x=5, y=465)
     button_deck.configure(font=fontExample)
     
-    button_card = Button(root, text="Single Card Check", command=card_page)
+    button_card = Button(root, text="Single Card Check", bg='#567', fg='White', command=card_page)
     button_card.place(x=165, y=465)
     button_card.configure(font=fontExample)
     

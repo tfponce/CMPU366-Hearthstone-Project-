@@ -2,11 +2,13 @@ from tkinter import *
 from PIL import ImageTk,Image
 from tkinter import messagebox
 import tkinter.font as tkFont
+from pickle import load
+from nltk.util import ngrams
 
 root = Tk()
 root.title("Hearthstone GUI") # Name to be decided on later
 root.iconbitmap("hnet.com-image.ico")
-root.geometry("500x500")
+root.geometry("500x519")
 fontExample = tkFont.Font(family="Arial", size=10, weight="bold", slant="italic")
 
 #root.config(bg='brown')
@@ -15,6 +17,8 @@ my_img1 = ImageTk.PhotoImage(Image.open("start_screen.png"))
 my_img2 = ImageTk.PhotoImage(Image.open("card_plus_background.png"))
 my_img3 = ImageTk.PhotoImage(Image.open("deck_list_colored.png"))
 my_img4 = ImageTk.PhotoImage(Image.open("construction.png"))
+
+my_ngrams = load(open('../models/ngrams', 'rb'))
 
 my_label = Label(root, image=my_img1)
 my_label.pack() # Remember to keep this on a seperate line or else you will get an error
@@ -37,6 +41,85 @@ def analyze_random_deck():
     return
 
 def analyze_generated():
+    return
+
+def generate_card(Class, mana, Type, attack, health, text_box):
+    if mana.get() == "Mana: " or Class.get() == "Class: " or Type.get() == "Type: ":
+        #button_analyze_card = Button(root, text="Analyze Card", state=DISABLED)
+        response = messagebox.showwarning("Missing Info!", "Fill out mana, class, and type to generate!")
+    else:
+        extra_info = 0
+
+        inpt_str = Class.get()[7:] + mana.get()[5:] + Type.get()[5:]
+        if attack.get() != "Attack: ":
+            extra_info += 1
+
+            inpt_str = inpt_str + attack.get()[7:]
+            if health.get() != "Health: ":
+                extra_info += 1
+
+                inpt_str = inpt_str + health.get()[7:]
+        
+        if extra_info == 0:
+            tokens = inpt_str.lower().split()
+        elif extra_info == 1:
+            tokens = inpt_str.lower().split()[1:]
+        else:
+            tokens = inpt_str.lower().split()[2:]
+
+        ngram_size = generation_type.get() + 1
+
+        ngram_dict = {1:[], 2:[], 3:[]} 
+        ngram_dict[ngram_size] = list(ngrams(tokens, ngram_size))[-1]
+
+        pred = {1:[], 2:[], 3:[]}
+        count = 0
+        curNgram = ngram_dict[ngram_size]
+
+        while count < 40:
+            for each in my_ngrams[ngram_size+1]:
+                if each[0][:-1] == curNgram:
+
+                    pred[ngram_size].append(each[0][-1])
+
+                    curNgram = curNgram[1:] + (each[0][-1], )
+
+                    break
+
+            if len(pred[ngram_size]) == count:
+                pred[ngram_size].append(my_ngrams[ngram_size+1][0][0][-1])
+                curNgram = curNgram[1:] + (my_ngrams[ngram_size+1][0][0][-1], )
+            count +=1
+            if curNgram[-1] == "</s>":
+                break
+
+        text_box.delete('1.0', END)
+
+        if Type.get()[6:].lower() == "minion" or Type.get()[6:].lower() == "weapon":
+            if extra_info == 0:
+                # Remove begining attack and health and ending </s> tage and join predicted text
+                text = " ".join(pred[ngram_size][2:(len(pred[ngram_size]) - 1)])
+
+                attack_text = pred[ngram_size][0]
+                health_text = pred[ngram_size][1]
+
+                attack.insert(END, attack_text)
+                health.insert(END, health_text)
+            elif extra_info == 1:
+                # Remove begining health and ending </s> tage and join predicted text
+                text = " ".join(pred[ngram_size][1:(len(pred[ngram_size]) - 1)])
+
+                health_text = pred[ngram_size][0]
+                health.insert(END, health_text)
+            else:
+                # Remove ending </s> tage and join predicted text
+                text = " ".join(pred[ngram_size][0:(len(pred[ngram_size]) - 1)])
+        else:
+            # Remove ending </s> tage and join predicted text
+            text = " ".join(pred[ngram_size][0:(len(pred[ngram_size]) - 1)])
+
+        text_box.insert('1.0', text)
+
     return
     
 def deck_page():
@@ -119,11 +202,40 @@ def card_page():
 def generate_page():
     global my_label
     global button_card
-    global button_generate
     
     my_label.pack_forget()
-    my_label = Label(root, image=my_img4)
+    my_label = Label(root, image=my_img2)
     my_label.pack()
+
+    mana = Entry(root, width=10, borderwidth=5)
+    mana.insert(0, "Mana: ")
+    mana.place(x=105, y=75)
+
+    Class = Entry(root, width=15, borderwidth=5)
+    Class.insert(0, "Class: ")
+    Class.place(x=125, y=260)
+
+    Type = Entry(root, width=15, borderwidth=5)
+    Type.insert(0, "Type: ")
+    Type.place(x=265, y=260)
+
+    attack = Entry(root, width=10, borderwidth=5)
+    attack.insert(0, "Attack: ")
+    attack.place(x=105, y=405)
+
+    health = Entry(root, width=10, borderwidth=5)
+    health.insert(0, "Health: ")
+    health.place(x=325, y=405)
+
+    text_box = Text(root, height=5, width=24)
+    text_box.place(x=170, y=315)
+    
+    mana.configure(font=fontExample)
+    Class.configure(font=fontExample)
+    Type.configure(font=fontExample)
+    attack.configure(font=fontExample)
+    health.configure(font=fontExample)
+    text_box.configure(font=fontExample)
     
     button_deck = Button(root, text="Check Deck List", bg='#567', fg='White', command=deck_page)
     button_deck.place(x=5, y=465)
@@ -132,10 +244,15 @@ def generate_page():
     button_card = Button(root, text="Single Card Check", bg='#567', fg='White', command=card_page)
     button_card.place(x=165, y=465)
     button_card.configure(font=fontExample)
-    
-    button_generate = Button(root, text="Analyze Generated Card", command=analyze_generated)
-    button_generate.place(x=335, y=465)
+
+    button_generate = Button(root, text="Generate Card", command=lambda: 
+                                                generate_card(Class,mana,Type,attack,health,text_box))
+    button_generate.place(x=202, y=10)
     button_generate.configure(font=fontExample)
+    
+    button_analyze = Button(root, text="Analyze Generated Card", command=analyze_generated)
+    button_analyze.place(x=335, y=465)
+    button_analyze.configure(font=fontExample)
 
 button_deck = Button(root, text="Check Deck List", relief="raised", command=deck_page)
 button_deck.place(x=5, y=465)
@@ -148,5 +265,16 @@ button_card.configure(font=fontExample)
 button_generate = Button(root, text="Generate A Card", relief="raised", command=generate_page)
 button_generate.place(x=382, y=465)
 button_generate.configure(font=fontExample)
+
+menubar = Menu(root)
+generation_type = IntVar()
+generation_type.set(1)
+
+generation_menu = Menu(menubar)
+generation_menu.add_radiobutton(label="Bigram",  variable=generation_type, value=0)
+generation_menu.add_radiobutton(label="Trigram", variable=generation_type, value=1)
+generation_menu.add_radiobutton(label="Fourgram", variable=generation_type, value=2)
+menubar.add_cascade(label='Generator', menu=generation_menu)
+root.config(menu=menubar)
 
 root.mainloop()

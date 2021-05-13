@@ -1,3 +1,5 @@
+import os
+import random
 from tkinter import *
 from PIL import ImageTk,Image
 from tkinter import messagebox
@@ -6,7 +8,7 @@ from pickle import load
 from nltk.util import ngrams
 
 root = Tk()
-root.title("Hearthstone GUI") # Name to be decided on later
+root.title("Archinator") 
 root.iconbitmap("hnet.com-image.ico")
 root.geometry("500x519")
 fontExample = tkFont.Font(family="Arial", size=10, weight="bold", slant="italic")
@@ -18,10 +20,16 @@ my_img2 = ImageTk.PhotoImage(Image.open("card_plus_background.png"))
 my_img3 = ImageTk.PhotoImage(Image.open("deck_list_colored.png"))
 my_img4 = ImageTk.PhotoImage(Image.open("construction.png"))
 
+# Folder Paths
+card_path = "../data/cards/"
+deck_path = "../data/decks/cleaner/"
+
 my_ngrams = load(open('../models/ngrams', 'rb'))
 
 my_label = Label(root, image=my_img1)
 my_label.pack() # Remember to keep this on a seperate line or else you will get an error
+
+classes = ["demonhunter", "druid", "hunter", "mage", "paladin", "priest", "rogue", "shaman", "warlock", "warrior"]
     
 def analyze_card(mana, name, attack, health, text_box):
     #print("text stuff: " + str(type(text_box.get("1.0",END))) + "END")
@@ -38,7 +46,66 @@ def analyze_deck():
     return
 
 def analyze_random_deck():
-    return
+    deck_list = {}
+    deck_size = 0
+    deck_size_limit = 30
+    random_choice = random.choice(classes)
+    
+    random_file = card_path + random_choice + ".txt"
+    neutral_file = card_path + "neutral.txt" 
+    
+    random_and_neutral = [random_file, neutral_file]
+    
+    #os.chdir(card_path)
+    
+    for item in random_and_neutral:
+        with open(item, 'r', encoding='utf-8') as card_file:
+            if item == random_file:
+                class_cards = card_file.readlines()
+            else:
+                neutral_cards = card_file.readlines()
+    
+    class_cards.extend(neutral_cards) # List that contains class and neutral cards
+    
+    while deck_size < deck_size_limit:
+        random_card = random.choice(class_cards)
+        values = random_card.split(", '")
+        card_name = ""
+        card_rarity = ""
+        i = 0
+        
+        while card_name == "" or card_rarity == "":
+            if "name': " in values[i]:
+                card_name = values[i]
+                card_name = card_name.split("name': ")[-1][1:-1]
+                #print(card_name)
+            elif "rarity" in values[i]:
+                #print(values[i])
+                card_rarity = values[i]
+                
+            i += 1
+        
+        if card_name in deck_list.keys():
+            if "LEGENDARY" not in card_rarity and deck_list.get(card_name) < 2:
+                updated_entry = {card_name: deck_list.get(card_name) + 1}
+                deck_list.update(updated_entry)
+                deck_size += 1
+        else:
+            if "LEGENDARY" not in card_rarity:
+                random_number = random.randint(1,2)
+                deck_list[card_name] = random_number
+                deck_size += random_number
+            else:
+                deck_list[card_name] = 1
+                deck_size += 1
+            
+    final_list = ""
+    
+    for entry in deck_list:
+        final_list += entry + " : " + str(deck_list.get(entry)) + "\n"
+    
+    response = messagebox.showinfo("Random " + random_choice.capitalize() + " deck", final_list)
+            
 
 def analyze_generated():
     return

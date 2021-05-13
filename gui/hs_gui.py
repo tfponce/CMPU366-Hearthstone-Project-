@@ -31,6 +31,9 @@ my_label.pack() # Remember to keep this on a seperate line or else you will get 
 
 classes = ["demonhunter", "druid", "hunter", "mage", "paladin", "priest", "rogue", "shaman", "warlock", "warrior"]
 types = ["spell", "minion", "weapon"]
+
+# This is only used for the generate section 
+first_push = 0  
     
 def analyze_card(mana, name, attack, health, text_box):
     #print("text stuff: " + str(type(text_box.get("1.0",END))) + "END")
@@ -112,12 +115,32 @@ def analyze_generated():
     return
 
 def generate_card(Class, mana, Type, attack, health, text_box):
+    global first_push
+
+    if first_push == 1:
+        mana.delete(0, 'end')
+        mana.insert(0, "Mana: ")
+        
+        Class.delete(0, 'end')
+        Class.insert(0, "Class: ")
+        
+        Type.delete(0, 'end')
+        Type.insert(0, "Type: ")
+        
+        attack.delete(0, 'end')
+        attack.insert(0, "Attack: ")
+        
+        health.delete(0, 'end')
+        health.insert(0, "Health: ")
+        
+        text_box.delete('1.0', END)
+    
     if mana.get() == "Mana: ":
         mana.insert(END, str(random.randint(1, 10)))
     if Class.get() == "Class: ":
-        Class.insert(END, random.choice(classes))
+        Class.insert(END, random.choice(classes).capitalize())
     if Type.get() == "Type: ":
-        Type.insert(END, random.choice(types))
+        Type.insert(END, random.choice(types).capitalize())
     
     extra_info = 0
 
@@ -191,16 +214,21 @@ def generate_card(Class, mana, Type, attack, health, text_box):
 
     text_box.insert('1.0', text)
 
+    first_push = 1 # The button has been pushed
+
     return
     
 def deck_page():
     global my_label
     global button_card
     global button_generate
+    global first_push
     
     my_label.pack_forget()
     my_label = Label(root, image=my_img3)
     my_label.pack()
+    
+    first_push = 0
     
     button_deck = Button(root, text="Analyze Deck", command=analyze_deck)
     button_deck.place(x=5, y=465)
@@ -227,10 +255,13 @@ def card_page():
     global button_deck
     global button_generate
     global button_card
+    global first_push
     
     my_label.pack_forget()
     my_label = Label(root, image=my_img2)
     my_label.pack()
+    
+    first_push = 0
     
     mana = Entry(root, width=10, borderwidth=5)
     mana.insert(0, "Mana: ")
@@ -273,6 +304,7 @@ def card_page():
 def generate_page():
     global my_label
     global button_card
+    global first_push
     
     my_label.pack_forget()
     my_label = Label(root, image=my_img2)
@@ -282,7 +314,7 @@ def generate_page():
     mana.insert(0, "Mana: ")
     mana.place(x=105, y=75)
 
-    Class = Entry(root, width=15, borderwidth=5)
+    Class = Entry(root, width=18, borderwidth=5)
     Class.insert(0, "Class: ")
     Class.place(x=125, y=260)
 

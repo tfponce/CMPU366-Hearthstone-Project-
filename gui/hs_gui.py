@@ -30,6 +30,7 @@ my_label = Label(root, image=my_img1)
 my_label.pack() # Remember to keep this on a seperate line or else you will get an error
 
 classes = ["demonhunter", "druid", "hunter", "mage", "paladin", "priest", "rogue", "shaman", "warlock", "warrior"]
+types = ["spell", "minion", "weapon"]
     
 def analyze_card(mana, name, attack, health, text_box):
     #print("text stuff: " + str(type(text_box.get("1.0",END))) + "END")
@@ -111,81 +112,84 @@ def analyze_generated():
     return
 
 def generate_card(Class, mana, Type, attack, health, text_box):
-    if mana.get() == "Mana: " or Class.get() == "Class: " or Type.get() == "Type: ":
-        #button_analyze_card = Button(root, text="Analyze Card", state=DISABLED)
-        response = messagebox.showwarning("Missing Info!", "Fill out mana, class, and type to generate!")
-    else:
-        extra_info = 0
+    if mana.get() == "Mana: ":
+        mana.insert(END, str(random.randint(1, 10)))
+    if Class.get() == "Class: ":
+        Class.insert(END, random.choice(classes))
+    if Type.get() == "Type: ":
+        Type.insert(END, random.choice(types))
+    
+    extra_info = 0
 
-        inpt_str = Class.get()[7:] + mana.get()[5:] + Type.get()[5:]
-        if attack.get() != "Attack: ":
+    inpt_str = Class.get()[7:] + mana.get()[5:] + Type.get()[5:]
+    if attack.get() != "Attack: ":
+        extra_info += 1
+
+        inpt_str = inpt_str + attack.get()[7:]
+        if health.get() != "Health: ":
             extra_info += 1
 
-            inpt_str = inpt_str + attack.get()[7:]
-            if health.get() != "Health: ":
-                extra_info += 1
+            inpt_str = inpt_str + health.get()[7:]
+    
+    if extra_info == 0:
+        tokens = inpt_str.lower().split()
+    elif extra_info == 1:
+        tokens = inpt_str.lower().split()[1:]
+    else:
+        tokens = inpt_str.lower().split()[2:]
 
-                inpt_str = inpt_str + health.get()[7:]
-        
-        if extra_info == 0:
-            tokens = inpt_str.lower().split()
-        elif extra_info == 1:
-            tokens = inpt_str.lower().split()[1:]
-        else:
-            tokens = inpt_str.lower().split()[2:]
+    ngram_size = generation_type.get() + 1
 
-        ngram_size = generation_type.get() + 1
+    ngram_dict = {1:[], 2:[], 3:[]} 
+    ngram_dict[ngram_size] = list(ngrams(tokens, ngram_size))[-1]
 
-        ngram_dict = {1:[], 2:[], 3:[]} 
-        ngram_dict[ngram_size] = list(ngrams(tokens, ngram_size))[-1]
+    pred = {1:[], 2:[], 3:[]}
+    count = 0
+    curNgram = ngram_dict[ngram_size]
 
-        pred = {1:[], 2:[], 3:[]}
-        count = 0
-        curNgram = ngram_dict[ngram_size]
+    while count < 40:
+        for each in my_ngrams[ngram_size+1]:
+            if each[0][:-1] == curNgram:
 
-        while count < 40:
-            for each in my_ngrams[ngram_size+1]:
-                if each[0][:-1] == curNgram:
+                pred[ngram_size].append(each[0][-1])
 
-                    pred[ngram_size].append(each[0][-1])
+                curNgram = curNgram[1:] + (each[0][-1], )
 
-                    curNgram = curNgram[1:] + (each[0][-1], )
-
-                    break
-
-            if len(pred[ngram_size]) == count:
-                pred[ngram_size].append(my_ngrams[ngram_size+1][0][0][-1])
-                curNgram = curNgram[1:] + (my_ngrams[ngram_size+1][0][0][-1], )
-            count +=1
-            if curNgram[-1] == "</s>":
                 break
 
-        text_box.delete('1.0', END)
+        if len(pred[ngram_size]) == count:
+            pred[ngram_size].append(my_ngrams[ngram_size+1][0][0][-1])
+            curNgram = curNgram[1:] + (my_ngrams[ngram_size+1][0][0][-1], )
+        count +=1
+        if curNgram[-1] == "</s>":
+            break
 
-        if Type.get()[6:].lower() == "minion" or Type.get()[6:].lower() == "weapon":
-            if extra_info == 0:
-                # Remove begining attack and health and ending </s> tage and join predicted text
-                text = " ".join(pred[ngram_size][2:(len(pred[ngram_size]) - 1)])
+    text_box.delete('1.0', END)
 
-                attack_text = pred[ngram_size][0]
-                health_text = pred[ngram_size][1]
+    if Type.get()[6:].lower() == "minion" or Type.get()[6:].lower() == "weapon":
+        if extra_info == 0 and len(pred[ngram_size]) >= 2:
+            # Remove begining attack and health and ending </s> tage and join predicted text
+            text = " ".join(pred[ngram_size][2:(len(pred[ngram_size]) - 1)])
 
-                attack.insert(END, attack_text)
-                health.insert(END, health_text)
-            elif extra_info == 1:
-                # Remove begining health and ending </s> tage and join predicted text
-                text = " ".join(pred[ngram_size][1:(len(pred[ngram_size]) - 1)])
+            attack_text = pred[ngram_size][0]
+            health_text = pred[ngram_size][1]
 
-                health_text = pred[ngram_size][0]
-                health.insert(END, health_text)
-            else:
-                # Remove ending </s> tage and join predicted text
-                text = " ".join(pred[ngram_size][0:(len(pred[ngram_size]) - 1)])
+            attack.insert(END, attack_text)
+            health.insert(END, health_text)
+        elif extra_info == 1 and len(pred[ngram_size]) >= 1:
+            # Remove begining health and ending </s> tage and join predicted text
+            text = " ".join(pred[ngram_size][1:(len(pred[ngram_size]) - 1)])
+
+            health_text = pred[ngram_size][0]
+            health.insert(END, health_text)
         else:
             # Remove ending </s> tage and join predicted text
             text = " ".join(pred[ngram_size][0:(len(pred[ngram_size]) - 1)])
+    else:
+        # Remove ending </s> tage and join predicted text
+        text = " ".join(pred[ngram_size][0:(len(pred[ngram_size]) - 1)])
 
-        text_box.insert('1.0', text)
+    text_box.insert('1.0', text)
 
     return
     

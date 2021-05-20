@@ -162,6 +162,29 @@ def native_bayes_classifier():
 
     # whatarch.show_most_informative_feats_all(40)
 
+def deck_classification(deck):
+    tokenized_deck = gen_feats(nltk.word_tokenize(deck))
+    classify_deck = whatarch.classify(tokenized_deck).upper()
+    
+    newlines = "\n"
+    
+    str_classify = "The best archetype for this deck is: " + classify_deck + "\n"
+    line = "-------------------------------------------------------\n"
+    
+    aggro_prob = whatarch.prob_classify(tokenized_deck).prob('aggro')
+    combo_prob = whatarch.prob_classify(tokenized_deck).prob('combo')
+    control_prob = whatarch.prob_classify(tokenized_deck).prob('control')
+    mid_prob = whatarch.prob_classify(tokenized_deck).prob('mid')
+    
+    str_aggro = "P(Aggro | Deck) = " + str(aggro_prob) + "\n"
+    str_combo = "P(Combo | Deck) = " + str(combo_prob) + "\n"
+    str_control = "P(Control | Deck) = " + str(control_prob) + "\n"
+    str_mid = "P(Midrange | Deck) = " + str(mid_prob) + "\n"
+    
+    display = newlines + str_classify + line + str_aggro + str_combo + str_control + str_mid
+    
+    return display
+
 def analyze_card(mana, name, attack, health, text_box):
     card_text = text_box.get("1.0",END)
     if mana.get() == "Mana: " or name.get() == "Name: " or attack.get() == "Attack: " or health.get() == "Health: ":
@@ -240,25 +263,9 @@ def analyze_random_deck():
         
     deck_to_analyze = deck_to_analyze[0:-2] # Getting rid of the last comma
     
-    tokenized_deck = gen_feats(nltk.word_tokenize(deck_to_analyze))
-    classify_deck = whatarch.classify(tokenized_deck).upper()
+    display = deck_classification(deck_to_analyze)
     
-    newlines = "\n"
-    
-    str_classify = "The best archetype for this deck is: " + classify_deck + "\n"
-    line = "-------------------------------------------------------\n"
-    
-    aggro_prob = whatarch.prob_classify(tokenized_deck).prob('aggro')
-    combo_prob = whatarch.prob_classify(tokenized_deck).prob('combo')
-    control_prob = whatarch.prob_classify(tokenized_deck).prob('control')
-    mid_prob = whatarch.prob_classify(tokenized_deck).prob('mid')
-    
-    str_aggro = "P(Aggro | Deck) = " + str(aggro_prob) + "\n"
-    str_combo = "P(Combo | Deck) = " + str(combo_prob) + "\n"
-    str_control = "P(Control | Deck) = " + str(control_prob) + "\n"
-    str_mid = "P(Midrange | Deck) = " + str(mid_prob) + "\n"
-    
-    deck_to_display += newlines + str_classify + line + str_aggro + str_combo + str_control + str_mid
+    deck_to_display += display
     
     response = messagebox.showinfo("Random " + deck_class + " deck", deck_to_display)
             

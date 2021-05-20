@@ -1,4 +1,5 @@
 import os
+import nltk
 import random
 from tkinter import *
 from PIL import ImageTk,Image
@@ -35,27 +36,146 @@ types = ["spell", "minion", "weapon"]
 # This is only used for the generate section 
 first_push = 0  
     
+aggressive_decks = deck_path + "AggroDecks.txt"
+combo_decks = deck_path + "ComboDecks.txt"
+control_decks = deck_path + "ControlDecks.txt"
+midrange_decks = deck_path + "MidrangeDecks.txt"
+
+deck_archetypes = [aggressive_decks, combo_decks, control_decks, midrange_decks]
+
+aggro, combo, control, mid = "", "", "", ""
+
+for deck in deck_archetypes:
+    with open(deck, 'r') as d:
+        if deck == aggressive_decks:
+            aggro = [(nltk.word_tokenize(x[0:-1]), "aggro") for x in d] 
+        elif deck == combo_decks:
+            combo = [(nltk.word_tokenize(x[0:-1]), "combo") for x in d]
+        elif deck == control_decks:
+            control = [(nltk.word_tokenize(x[0:-1]), "control") for x in d]
+        else:
+            mid = [(nltk.word_tokenize(x[0:-1]), "mid") for x in d]
+            
+arch_decks = [*aggro, *combo, *control, *mid] # Join lists
+random.Random(10).shuffle(arch_decks)
+
+# Partitioning
+test_archdecks = [x for x in arch_decks[0:200]]  
+devtest_archdecks = [x for x in arch_decks[200:400]]  
+train_archdecks = [x for x in arch_decks[400:]]  
+
+def gen_feats(deck):
+    features = {}
+    for d in deck:
+        features["contains-" + d.lower()] = 1
+    return features
+
+# Generating feature sets
+test_feats = [(gen_feats(d), c)  for (d,c) in test_archdecks]  
+devtest_feats = [(gen_feats(d), c) for (d,c) in devtest_archdecks]  
+train_feats = [(gen_feats(d), c) for (d,c) in train_archdecks] 
+
+# Training...
+whatarch = nltk.NaiveBayesClassifier.train(train_feats)  
+
+# Testing...
+accuracy = nltk.classify.accuracy(whatarch, test_feats)  
+#print("Accuracy score: ", accuracy)
+
+# aa: real deck aggro, guessed aggro
+# ao: real deck aggro, guessed combo
+# ac: real deck aggro, guessed control
+# am: real deck aggro, guessed mid
+
+# oo: real deck combo, guessed combo
+# oa: real deck combo, guessed aggro
+# oc: real deck combo, guessed control
+# om: real deck combo, guessed mid
+
+# cc: real deck control, guessed control
+# ca: real deck control, guessed aggro
+# co: real deck control, guessed combo
+# cm: real deck control, guessed mid
+
+# mm: real deck mid, guessed mid
+# ma: real deck mid, guessed aggro
+# mc: real deck mid, guessed control
+# mo: real deck mid, guessed combo
+""" aa, ao, ac, am = [], [], [], [] 
+oo, oa, oc, om = [], [], [], [] 
+cc, ca, co, cm = [], [], [], []
+mm, ma, mc, mo = [], [], [], []
+for (deck, auth) in devtest_archdecks:
+    guess = whatarch.classify(gen_feats(deck))
+    if auth == "aggro" and guess == "aggro":
+        aa.append((auth, guess, deck))
+    elif auth == "aggro" and guess == "combo":
+        ao.append((auth, guess, deck))
+    elif auth == "aggro" and guess == "control":
+        ac.append((auth, guess, deck))
+    elif auth == "aggro" and guess == "mid":
+        am.append((auth, guess, deck))
+    elif auth == "combo" and guess == "combo":
+        oo.append((auth, guess, deck))
+    elif auth == "combo" and guess == "aggro":
+        oa.append((auth, guess, deck))
+    elif auth == "combo" and guess == "control":
+        oc.append((auth, guess, deck))
+    elif auth == "combo" and guess == "mid":
+        om.append((auth, guess, deck))
+    elif auth == "control" and guess == "control":
+        cc.append((auth, guess, deck))
+    elif auth == "control" and guess == "aggro":
+        ca.append((auth, guess, deck))
+    elif auth == "control" and guess == "combo":
+        co.append((auth, guess, deck))
+    elif auth == "control" and guess == "mid":
+        cm.append((auth, guess, deck))
+    elif auth == "mid" and guess == "mid":
+        mm.append((auth, guess, deck))
+    elif auth == "mid" and guess == "aggro":
+        ma.append((auth, guess, deck))
+    elif auth == "mid" and guess == "combo":
+        mo.append((auth, guess, deck))
+    elif auth == "mid" and guess == "control":
+        mc.append((auth, guess, deck))
+        
+auth_guess_list = [aa, ao, ac, am, oo, oa, oc, om, cc, ca, co, cm, mm, ma, mc, mo]
+for x in auth_guess_list:
+    if len(x) > 0:  
+        auth, guess, deck = random.choice(x)
+        print("real=%-8s guess=%-8s" % (auth, guess))
+        print(" ".join(deck))
+        print("-------")
+    else:
+        print("No guesses were made for this list")
+        print("-------")
+print() """
+
+# whatarch.show_most_informative_feats_all(40)
+
+# print(arch_decks[-2:])
+    
 def analyze_card(mana, name, attack, health, text_box):
-    #print("text stuff: " + str(type(text_box.get("1.0",END))) + "END")
     card_text = text_box.get("1.0",END)
     if mana.get() == "Mana: " or name.get() == "Name: " or attack.get() == "Attack: " or health.get() == "Health: ":
-        #button_analyze_card = Button(root, text="Analyze Card", state=DISABLED)
         response = messagebox.showwarning("Missing Info!", "Fill out all of the card info!")
     else:
         if card_text == "\n":
             card_text = "VANILLA" 
         # This is where we need to write the code that actually analyzes the card 
     
-def analyze_deck():
-    return
+def analyze_deck(text_box):
+    response = messagebox.showinfo("Text Box!", text_box.get("1.0",'end-1c').split("\n"))
 
 def analyze_random_deck():
     deck_list = {}
     deck_size = 0
     deck_size_limit = 30
-    random_choice = random.choice(classes)
+    deck_format = "'Format': 'Wild', "  # We are generating random decks from all expansions
+    random_class = random.choice(classes)
     
-    random_file = card_path + random_choice + ".txt"
+    random_file = card_path + random_class + ".txt"
     neutral_file = card_path + "neutral.txt" 
     
     random_and_neutral = [random_file, neutral_file]
@@ -82,9 +202,7 @@ def analyze_random_deck():
             if "name': " in values[i]:
                 card_name = values[i]
                 card_name = card_name.split("name': ")[-1][1:-1]
-                #print(card_name)
             elif "rarity" in values[i]:
-                #print(values[i])
                 card_rarity = values[i]
                 
             i += 1
@@ -102,13 +220,41 @@ def analyze_random_deck():
             else:
                 deck_list[card_name] = 1
                 deck_size += 1
-            
-    final_list = ""
+    
+    deck_class = random_class.capitalize()
+    deck_to_display = ""
+    deck_to_analyze = "'Class': " + "'" + deck_class + "', " + deck_format
+    
+    if random_class == "demonhunter": 
+        deck_to_analyze = "'Class': " + "'Demon Hunter', " + deck_format
     
     for entry in deck_list:
-        final_list += entry + " : " + str(deck_list.get(entry)) + "\n"
+        deck_to_display += entry + " : " + str(deck_list.get(entry)) + "\n"
+        deck_to_analyze += "'" + entry + "'" + " : " + str(deck_list.get(entry)) + ", "
+        
+    deck_to_analyze = deck_to_analyze[0:-2] # Getting rid of the last comma
     
-    response = messagebox.showinfo("Random " + random_choice.capitalize() + " deck", final_list)
+    tokenized_deck = gen_feats(nltk.word_tokenize(deck_to_analyze))
+    classify_deck = whatarch.classify(tokenized_deck).upper()
+    
+    newlines = "\n"
+    
+    str_classify = "The best archetype for this deck is: " + classify_deck + "\n"
+    line = "-------------------------------------------------------\n"
+    
+    aggro_prob = whatarch.prob_classify(tokenized_deck).prob('aggro')
+    combo_prob = whatarch.prob_classify(tokenized_deck).prob('combo')
+    control_prob = whatarch.prob_classify(tokenized_deck).prob('control')
+    mid_prob = whatarch.prob_classify(tokenized_deck).prob('mid')
+    
+    str_aggro = "P(Aggro | Deck) = " + str(aggro_prob) + "\n"
+    str_combo = "P(Combo | Deck) = " + str(combo_prob) + "\n"
+    str_control = "P(Control | Deck) = " + str(control_prob) + "\n"
+    str_mid = "P(Midrange | Deck) = " + str(mid_prob) + "\n"
+    
+    deck_to_display += newlines + str_classify + line + str_aggro + str_combo + str_control + str_mid
+    
+    response = messagebox.showinfo("Random " + deck_class + " deck", deck_to_display)
             
 
 def analyze_generated():
@@ -230,7 +376,11 @@ def deck_page():
     
     first_push = 0
     
-    button_deck = Button(root, text="Analyze Deck", command=analyze_deck)
+    text_box = Text(root, height=20, width=25)
+    text_box.place(x=160,y=120)
+    text_box.configure(font=fontExample)
+    
+    button_deck = Button(root, text="Analyze Deck", command=lambda: analyze_deck(text_box))
     button_deck.place(x=5, y=465)
     button_deck.configure(font=fontExample)
     
@@ -246,9 +396,6 @@ def deck_page():
     button_generate.place(x=382, y=465)
     button_generate.configure(font=fontExample)
     
-    text_box = Text(root, height=20, width=25)
-    text_box.place(x=160,y=120)
-    text_box.configure(font=fontExample)
     
 def card_page():
     global my_label

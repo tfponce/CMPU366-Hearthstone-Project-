@@ -35,127 +35,133 @@ types = ["spell", "minion", "weapon"]
 
 # This is only used for the generate section 
 first_push = 0  
+
+classifier_created = 0
     
 aggressive_decks = deck_path + "AggroDecks.txt"
 combo_decks = deck_path + "ComboDecks.txt"
 control_decks = deck_path + "ControlDecks.txt"
 midrange_decks = deck_path + "MidrangeDecks.txt"
 
-deck_archetypes = [aggressive_decks, combo_decks, control_decks, midrange_decks]
-
-aggro, combo, control, mid = "", "", "", ""
-
-for deck in deck_archetypes:
-    with open(deck, 'r') as d:
-        if deck == aggressive_decks:
-            aggro = [(nltk.word_tokenize(x[0:-1]), "aggro") for x in d] 
-        elif deck == combo_decks:
-            combo = [(nltk.word_tokenize(x[0:-1]), "combo") for x in d]
-        elif deck == control_decks:
-            control = [(nltk.word_tokenize(x[0:-1]), "control") for x in d]
-        else:
-            mid = [(nltk.word_tokenize(x[0:-1]), "mid") for x in d]
-            
-arch_decks = [*aggro, *combo, *control, *mid] # Join lists
-random.Random(10).shuffle(arch_decks)
-
-# Partitioning
-test_archdecks = [x for x in arch_decks[0:200]]  
-devtest_archdecks = [x for x in arch_decks[200:400]]  
-train_archdecks = [x for x in arch_decks[400:]]  
-
 def gen_feats(deck):
-    features = {}
-    for d in deck:
-        features["contains-" + d.lower()] = 1
-    return features
+        features = {}
+        for d in deck:
+            features["contains-" + d.lower()] = 1
+        return features
 
-# Generating feature sets
-test_feats = [(gen_feats(d), c)  for (d,c) in test_archdecks]  
-devtest_feats = [(gen_feats(d), c) for (d,c) in devtest_archdecks]  
-train_feats = [(gen_feats(d), c) for (d,c) in train_archdecks] 
-
-# Training...
-whatarch = nltk.NaiveBayesClassifier.train(train_feats)  
-
-# Testing...
-accuracy = nltk.classify.accuracy(whatarch, test_feats)  
-#print("Accuracy score: ", accuracy)
-
-# aa: real deck aggro, guessed aggro
-# ao: real deck aggro, guessed combo
-# ac: real deck aggro, guessed control
-# am: real deck aggro, guessed mid
-
-# oo: real deck combo, guessed combo
-# oa: real deck combo, guessed aggro
-# oc: real deck combo, guessed control
-# om: real deck combo, guessed mid
-
-# cc: real deck control, guessed control
-# ca: real deck control, guessed aggro
-# co: real deck control, guessed combo
-# cm: real deck control, guessed mid
-
-# mm: real deck mid, guessed mid
-# ma: real deck mid, guessed aggro
-# mc: real deck mid, guessed control
-# mo: real deck mid, guessed combo
-""" aa, ao, ac, am = [], [], [], [] 
-oo, oa, oc, om = [], [], [], [] 
-cc, ca, co, cm = [], [], [], []
-mm, ma, mc, mo = [], [], [], []
-for (deck, auth) in devtest_archdecks:
-    guess = whatarch.classify(gen_feats(deck))
-    if auth == "aggro" and guess == "aggro":
-        aa.append((auth, guess, deck))
-    elif auth == "aggro" and guess == "combo":
-        ao.append((auth, guess, deck))
-    elif auth == "aggro" and guess == "control":
-        ac.append((auth, guess, deck))
-    elif auth == "aggro" and guess == "mid":
-        am.append((auth, guess, deck))
-    elif auth == "combo" and guess == "combo":
-        oo.append((auth, guess, deck))
-    elif auth == "combo" and guess == "aggro":
-        oa.append((auth, guess, deck))
-    elif auth == "combo" and guess == "control":
-        oc.append((auth, guess, deck))
-    elif auth == "combo" and guess == "mid":
-        om.append((auth, guess, deck))
-    elif auth == "control" and guess == "control":
-        cc.append((auth, guess, deck))
-    elif auth == "control" and guess == "aggro":
-        ca.append((auth, guess, deck))
-    elif auth == "control" and guess == "combo":
-        co.append((auth, guess, deck))
-    elif auth == "control" and guess == "mid":
-        cm.append((auth, guess, deck))
-    elif auth == "mid" and guess == "mid":
-        mm.append((auth, guess, deck))
-    elif auth == "mid" and guess == "aggro":
-        ma.append((auth, guess, deck))
-    elif auth == "mid" and guess == "combo":
-        mo.append((auth, guess, deck))
-    elif auth == "mid" and guess == "control":
-        mc.append((auth, guess, deck))
-        
-auth_guess_list = [aa, ao, ac, am, oo, oa, oc, om, cc, ca, co, cm, mm, ma, mc, mo]
-for x in auth_guess_list:
-    if len(x) > 0:  
-        auth, guess, deck = random.choice(x)
-        print("real=%-8s guess=%-8s" % (auth, guess))
-        print(" ".join(deck))
-        print("-------")
-    else:
-        print("No guesses were made for this list")
-        print("-------")
-print() """
-
-# whatarch.show_most_informative_feats_all(40)
-
-# print(arch_decks[-2:])
+def native_bayes_classifier(): 
+    global whatarch  
     
+    if classifier_created == 1:
+        return
+    
+    deck_archetypes = [aggressive_decks, combo_decks, control_decks, midrange_decks]
+
+    aggro, combo, control, mid = "", "", "", ""
+
+    for deck in deck_archetypes:
+        with open(deck, 'r') as d:
+            if deck == aggressive_decks:
+                aggro = [(nltk.word_tokenize(x[0:-1]), "aggro") for x in d] 
+            elif deck == combo_decks:
+                combo = [(nltk.word_tokenize(x[0:-1]), "combo") for x in d]
+            elif deck == control_decks:
+                control = [(nltk.word_tokenize(x[0:-1]), "control") for x in d]
+            else:
+                mid = [(nltk.word_tokenize(x[0:-1]), "mid") for x in d]
+                
+    arch_decks = [*aggro, *combo, *control, *mid] # Join lists
+    random.Random(10).shuffle(arch_decks)
+
+    # Partitioning
+    test_archdecks = [x for x in arch_decks[0:200]]  
+    devtest_archdecks = [x for x in arch_decks[200:400]]  
+    train_archdecks = [x for x in arch_decks[400:]]  
+
+    # Generating feature sets
+    test_feats = [(gen_feats(d), c)  for (d,c) in test_archdecks]  
+    devtest_feats = [(gen_feats(d), c) for (d,c) in devtest_archdecks]  
+    train_feats = [(gen_feats(d), c) for (d,c) in train_archdecks] 
+
+    # Training...
+    whatarch = nltk.NaiveBayesClassifier.train(train_feats)  
+
+    # Testing...
+    accuracy = nltk.classify.accuracy(whatarch, test_feats)  
+    #print("Accuracy score: ", accuracy)
+
+    # aa: real deck aggro, guessed aggro
+    # ao: real deck aggro, guessed combo
+    # ac: real deck aggro, guessed control
+    # am: real deck aggro, guessed mid
+
+    # oo: real deck combo, guessed combo
+    # oa: real deck combo, guessed aggro
+    # oc: real deck combo, guessed control
+    # om: real deck combo, guessed mid
+
+    # cc: real deck control, guessed control
+    # ca: real deck control, guessed aggro
+    # co: real deck control, guessed combo
+    # cm: real deck control, guessed mid
+
+    # mm: real deck mid, guessed mid
+    # ma: real deck mid, guessed aggro
+    # mc: real deck mid, guessed control
+    # mo: real deck mid, guessed combo
+    """ aa, ao, ac, am = [], [], [], [] 
+    oo, oa, oc, om = [], [], [], [] 
+    cc, ca, co, cm = [], [], [], []
+    mm, ma, mc, mo = [], [], [], []
+    for (deck, auth) in devtest_archdecks:
+        guess = whatarch.classify(gen_feats(deck))
+        if auth == "aggro" and guess == "aggro":
+            aa.append((auth, guess, deck))
+        elif auth == "aggro" and guess == "combo":
+            ao.append((auth, guess, deck))
+        elif auth == "aggro" and guess == "control":
+            ac.append((auth, guess, deck))
+        elif auth == "aggro" and guess == "mid":
+            am.append((auth, guess, deck))
+        elif auth == "combo" and guess == "combo":
+            oo.append((auth, guess, deck))
+        elif auth == "combo" and guess == "aggro":
+            oa.append((auth, guess, deck))
+        elif auth == "combo" and guess == "control":
+            oc.append((auth, guess, deck))
+        elif auth == "combo" and guess == "mid":
+            om.append((auth, guess, deck))
+        elif auth == "control" and guess == "control":
+            cc.append((auth, guess, deck))
+        elif auth == "control" and guess == "aggro":
+            ca.append((auth, guess, deck))
+        elif auth == "control" and guess == "combo":
+            co.append((auth, guess, deck))
+        elif auth == "control" and guess == "mid":
+            cm.append((auth, guess, deck))
+        elif auth == "mid" and guess == "mid":
+            mm.append((auth, guess, deck))
+        elif auth == "mid" and guess == "aggro":
+            ma.append((auth, guess, deck))
+        elif auth == "mid" and guess == "combo":
+            mo.append((auth, guess, deck))
+        elif auth == "mid" and guess == "control":
+            mc.append((auth, guess, deck))
+            
+    auth_guess_list = [aa, ao, ac, am, oo, oa, oc, om, cc, ca, co, cm, mm, ma, mc, mo]
+    for x in auth_guess_list:
+        if len(x) > 0:  
+            auth, guess, deck = random.choice(x)
+            print("real=%-8s guess=%-8s" % (auth, guess))
+            print(" ".join(deck))
+            print("-------")
+        else:
+            print("No guesses were made for this list")
+            print("-------")
+    print() """
+
+    # whatarch.show_most_informative_feats_all(40)
+
 def analyze_card(mana, name, attack, health, text_box):
     card_text = text_box.get("1.0",END)
     if mana.get() == "Mana: " or name.get() == "Name: " or attack.get() == "Attack: " or health.get() == "Health: ":
@@ -369,12 +375,17 @@ def deck_page():
     global button_card
     global button_generate
     global first_push
+    global classifier_created
     
     my_label.pack_forget()
     my_label = Label(root, image=my_img3)
     my_label.pack()
     
     first_push = 0
+    
+    if classifier_created == 0:
+        native_bayes_classifier()
+        classifier_created = 1
     
     text_box = Text(root, height=20, width=25)
     text_box.place(x=160,y=120)
@@ -403,12 +414,17 @@ def card_page():
     global button_generate
     global button_card
     global first_push
+    global classifier_created
     
     my_label.pack_forget()
     my_label = Label(root, image=my_img2)
     my_label.pack()
     
     first_push = 0
+    
+    if classifier_created == 0:
+        native_bayes_classifier()
+        classifier_created = 1
     
     mana = Entry(root, width=10, borderwidth=5)
     mana.insert(0, "Mana: ")
@@ -452,6 +468,7 @@ def generate_page():
     global my_label
     global button_card
     global first_push
+    global classifier_created
     
     my_label.pack_forget()
     my_label = Label(root, image=my_img2)

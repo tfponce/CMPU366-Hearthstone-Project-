@@ -30,14 +30,25 @@ my_ngrams = load(open('../models/ngrams', 'rb'))
 my_label = Label(root, image=my_img1)
 my_label.pack() # Remember to keep this on a seperate line or else you will get an error
 
+choices = {"Demon Hunter", "Druid", "Hunter", "Mage", "Paladin", "Priest", "Rogue", "Shaman", "Warlock", "Warrior"}
 classes = ["demonhunter", "druid", "hunter", "mage", "paladin", "priest", "rogue", "shaman", "warlock", "warrior"]
 types = ["spell", "minion", "weapon"]
 
 # This is only used for the generate section 
 first_push = 0  
 
-classifier_created = 0
-    
+# We are generating random decks from all expansions
+deck_format = "'Format': 'Wild', "  
+
+card_type = {}
+card_class = {}
+card_mana = {}
+card_rarity = {}
+card_text = {} # Modified card text that is without special symbols
+card_text2 = {} # Exact card text that came from our data
+card_attack = {}
+card_health = {}
+
 aggressive_decks = deck_path + "AggroDecks.txt"
 combo_decks = deck_path + "ComboDecks.txt"
 control_decks = deck_path + "ControlDecks.txt"
@@ -51,9 +62,6 @@ def gen_feats(deck):
 
 def native_bayes_classifier(): 
     global whatarch  
-    
-    if classifier_created == 1:
-        return
     
     deck_archetypes = [aggressive_decks, combo_decks, control_decks, midrange_decks]
 
@@ -161,12 +169,71 @@ def native_bayes_classifier():
     print() """
 
     # whatarch.show_most_informative_feats_all(40)
+    
+def card_library_creator():
+    classes_and_neutral = classes + ["neutral"]
+    for c in classes_and_neutral:
+        class_file = card_path + c + ".txt"
+        with open(class_file, "r", encoding="utf8") as cf:
+            cards = cf.readlines()
+            for x in cards:
+                values = x.split(", '")
+                name = ""
+                cardclass = ""
+                rarity = ""
+                cardtype = ""
+                mana = ""
+                text = ""
+                text2 = ""
+                attack = ""
+                health = ""
+        
+                for v in values:
+                    if "name': " in v:
+                        name = v
+                        name = name.split("name': ")[-1][1:-1]
+                    elif "cardClass': " in v:
+                        cardclass = v
+                        cardclass = cardclass.split("cardclass': ")[-1][1:-1]
+                        if cardclass in "DEMONHUNTER":
+                            cardclass = "Demon Hunter"
+                        else:
+                            cardclass = cardclass.lower().capitalize()
+                    elif "rarity': " in v:
+                        rarity = v
+                        rarity = rarity.split("rarity': ")[-1][1:-1]
+                    elif "cost': " in v:
+                        mana = v
+                        mana = mana.split("cost': ")[-1]
+                    elif "text': " in v:
+                        text2 = v
+                        text2 = text2.split("text': ")[-1][1:-1]
+                        text = text2.replace("<b>", "").replace("</b>", "")
+                    elif "attack': " in v:
+                        attack = v
+                        attack = attack.split("attack': ")[-1]
+                    elif "health': " in v:
+                        health = v
+                        health = health.split("health': ")[-1]
+                    elif "type': " in v:
+                        cardtype = v
+                        cardtype = cardtype.split("type': ")[-1][1:-1]
+                        
+                card_type[name] = cardtype
+                card_class[name] = cardclass
+                card_mana[name] = mana
+                card_rarity[name] = rarity
+                card_text[name] = text
+                card_text2[name] = text2
+                card_attack[name] = attack
+                card_health[name] = health
+
 
 def deck_classification(deck):
     tokenized_deck = gen_feats(nltk.word_tokenize(deck))
     classify_deck = whatarch.classify(tokenized_deck).upper()
     
-    newlines = "\n"
+    newline = "\n"
     
     str_classify = "The best archetype for this deck is: " + classify_deck + "\n"
     line = "-------------------------------------------------------\n"
@@ -181,11 +248,11 @@ def deck_classification(deck):
     str_control = "P(Control | Deck) = " + str(control_prob) + "\n"
     str_mid = "P(Midrange | Deck) = " + str(mid_prob) + "\n"
     
-    display = newlines + str_classify + line + str_aggro + str_combo + str_control + str_mid
+    display = newline + str_classify + line + str_aggro + str_combo + str_control + str_mid
     
     return display
 
-def analyze_card(mana, name, attack, health, text_box):
+def analyze_card(mana, name, attack, health, text_box, tkvar):
     card_text = text_box.get("1.0",END)
     if mana.get() == "Mana: " or name.get() == "Name: " or attack.get() == "Attack: " or health.get() == "Health: ":
         response = messagebox.showwarning("Missing Info!", "Fill out all of the card info!")
@@ -194,14 +261,22 @@ def analyze_card(mana, name, attack, health, text_box):
             card_text = "VANILLA" 
         # This is where we need to write the code that actually analyzes the card 
     
-def analyze_deck(text_box):
-    response = messagebox.showinfo("Text Box!", text_box.get("1.0",'end-1c').split("\n"))
+def analyze_deck(text_box, tkvar):
+    global card_library
+    
+    if tkvar.get() == "Pick a class":
+        messagebox.showerror("Missing Info!", "Please select a class for your deck")
+        return
+    
+    print(text_box.get("1.0",'end-1c').replace("\n", " ").split(" "))
+    """ text = str(text_box.get("1.0",'end-1c'))
+    tokenized = gen_feats(nltk.word_tokenize(text))
+    response = messagebox.showinfo("Text Box!", tokenized) """
 
 def analyze_random_deck():
     deck_list = {}
     deck_size = 0
     deck_size_limit = 30
-    deck_format = "'Format': 'Wild', "  # We are generating random decks from all expansions
     random_class = random.choice(classes)
     
     random_file = card_path + random_class + ".txt"
@@ -224,25 +299,25 @@ def analyze_random_deck():
         random_card = random.choice(class_cards)
         values = random_card.split(", '")
         card_name = ""
-        card_rarity = ""
+        rarity = ""
         i = 0
         
-        while card_name == "" or card_rarity == "":
+        while card_name == "" or rarity == "":
             if "name': " in values[i]:
                 card_name = values[i]
                 card_name = card_name.split("name': ")[-1][1:-1]
             elif "rarity" in values[i]:
-                card_rarity = values[i]
+                rarity = values[i]
                 
             i += 1
         
         if card_name in deck_list.keys():
-            if "LEGENDARY" not in card_rarity and deck_list.get(card_name) < 2:
+            if "LEGENDARY" not in rarity and deck_list.get(card_name) < 2:
                 updated_entry = {card_name: deck_list.get(card_name) + 1}
                 deck_list.update(updated_entry)
                 deck_size += 1
         else:
-            if "LEGENDARY" not in card_rarity:
+            if "LEGENDARY" not in rarity:
                 random_number = random.randint(1,2)
                 deck_list[card_name] = random_number
                 deck_size += random_number
@@ -382,7 +457,6 @@ def deck_page():
     global button_card
     global button_generate
     global first_push
-    global classifier_created
     
     my_label.pack_forget()
     my_label = Label(root, image=my_img3)
@@ -390,15 +464,18 @@ def deck_page():
     
     first_push = 0
     
-    if classifier_created == 0:
-        native_bayes_classifier()
-        classifier_created = 1
-    
     text_box = Text(root, height=20, width=25)
     text_box.place(x=160,y=120)
     text_box.configure(font=fontExample)
     
-    button_deck = Button(root, text="Analyze Deck", command=lambda: analyze_deck(text_box))
+    tkvar = StringVar(root)
+    tkvar.set('Pick a class')
+    popupMenu = OptionMenu(root, tkvar, *choices)
+    popupMenu.place(x=23, y=225)
+    popupMenu.configure(font=fontExample)
+    
+    button_deck = Button(root, text="Analyze Deck", command=lambda: 
+                                                 analyze_deck(text_box, tkvar))
     button_deck.place(x=5, y=465)
     button_deck.configure(font=fontExample)
     
@@ -421,7 +498,6 @@ def card_page():
     global button_generate
     global button_card
     global first_push
-    global classifier_created
     
     my_label.pack_forget()
     my_label = Label(root, image=my_img2)
@@ -429,41 +505,42 @@ def card_page():
     
     first_push = 0
     
-    if classifier_created == 0:
-        native_bayes_classifier()
-        classifier_created = 1
-    
     mana = Entry(root, width=10, borderwidth=5)
     mana.insert(0, "Mana: ")
     mana.place(x=105, y=75)
+    mana.configure(font=fontExample)
 
     name = Entry(root, width=35, borderwidth=5)
     name.insert(0, "Name: ")
     name.place(x=125, y=260)
+    name.configure(font=fontExample)
 
     attack = Entry(root, width=10, borderwidth=5)
     attack.insert(0, "Attack: ")
     attack.place(x=105, y=405)
+    attack.configure(font=fontExample)
 
     health = Entry(root, width=10, borderwidth=5)
     health.insert(0, "Health: ")
     health.place(x=325, y=405)
+    health.configure(font=fontExample)
 
     text_box = Text(root, height=5, width=24)
     text_box.place(x=170, y=315)
-    
-    mana.configure(font=fontExample)
-    name.configure(font=fontExample)
-    attack.configure(font=fontExample)
-    health.configure(font=fontExample)
     text_box.configure(font=fontExample)
+    
+    tkvar = StringVar(root)
+    tkvar.set('Pick a class')
+    popupMenu = OptionMenu(root, tkvar, *choices)
+    popupMenu.place(x=190, y=7)
+    popupMenu.configure(font=fontExample)
     
     button_deck = Button(root, text="Check Deck List", bg='#567', fg='White', command=deck_page)
     button_deck.place(x=5, y=465)
     button_deck.configure(font=fontExample)
     
     button_card = Button(root, text="Analyze Card", command=lambda: 
-                                analyze_card(mana,name,attack,health,text_box))
+                            analyze_card(mana,name,attack,health,text_box,tkvar))
     button_card.place(x=200, y=465)
     button_card.configure(font=fontExample)
     
@@ -475,7 +552,6 @@ def generate_page():
     global my_label
     global button_card
     global first_push
-    global classifier_created
     
     my_label.pack_forget()
     my_label = Label(root, image=my_img2)
@@ -551,4 +627,6 @@ generation_menu.add_radiobutton(label="Fourgram", variable=generation_type, valu
 menubar.add_cascade(label='Generator', menu=generation_menu)
 root.config(menu=menubar)
 
+card_library_creator()
+native_bayes_classifier()
 root.mainloop()

@@ -39,6 +39,7 @@ first_push = 0
 
 # We are generating random decks from all expansions
 deck_format = "'Format': 'Wild', "  
+deck_size_limit = 30
 
 card_type = {}
 card_class = {}
@@ -194,8 +195,8 @@ def card_library_creator():
                         name = name.split("name': ")[-1][1:-1]
                     elif "cardClass': " in v:
                         cardclass = v
-                        cardclass = cardclass.split("cardclass': ")[-1][1:-1]
-                        if cardclass in "DEMONHUNTER":
+                        cardclass = cardclass.split("cardClass': ")[-1][1:-1]
+                        if cardclass == "DEMONHUNTER":
                             cardclass = "Demon Hunter"
                         else:
                             cardclass = cardclass.lower().capitalize()
@@ -227,7 +228,6 @@ def card_library_creator():
                 card_text2[name] = text2
                 card_attack[name] = attack
                 card_health[name] = health
-
 
 def deck_classification(deck):
     tokenized_deck = gen_feats(nltk.word_tokenize(deck))
@@ -262,21 +262,80 @@ def analyze_card(mana, name, attack, health, text_box, tkvar):
         # This is where we need to write the code that actually analyzes the card 
     
 def analyze_deck(text_box, tkvar):
-    global card_library
-    
     if tkvar.get() == "Pick a class":
         messagebox.showerror("Missing Info!", "Please select a class for your deck")
         return
     
-    print(text_box.get("1.0",'end-1c').replace("\n", " ").split(" "))
-    """ text = str(text_box.get("1.0",'end-1c'))
-    tokenized = gen_feats(nltk.word_tokenize(text))
-    response = messagebox.showinfo("Text Box!", tokenized) """
+    user_list = text_box.get("1.0",'end-1c').replace("\n", " : ").split(" : ")
+    print(user_list)
+    list_len = len(user_list)
+    deck_class = tkvar.get()
+    deck_to_analyze = "'Class': " + "'" + deck_class + "', " + deck_format
+    deck_to_display = ""
+    deck_size = 0
+    i = 0
+    
+    if list_len % 2 != 0:
+        messagebox.showerror("Incorrect Formatting!", "Something is wrong with your deck's format")
+        return
+    
+    while i < list_len:
+        cname = user_list[i]
+        copies = user_list[i+1].strip()
+        cards = ""
+        
+        if copies.isdigit():
+            copies = int(copies)
+            rarity = card_rarity.get(cname)
+            
+            if (rarity == "LEGENDARY" and copies == 1) or (rarity != "LEGENDARY" and copies <= 2):
+                cclass = card_class.get(cname)
+                
+                if cclass == deck_class or cclass == "Neutral" or cname == "Arcane Golem":
+                    deck_size += copies
+                    deck_to_analyze += "'" + cname + "'" + " : " + str(copies) + ", "
+                    deck_to_display += cname + " : " + str(copies) + "\n"
+                else:
+                    messagebox.showerror("Wrong class!", str(cname) + " is not a " + str(deck_class) + " class card. \n" +
+                                          "It is a " + str(cclass) + " class card.")
+                    return
+            else:
+                if rarity == "LEGENDARY":
+                    n = "1"
+                else:
+                    n = "2"
+                    messagebox.showerror("Too many copies!", "The max number of copies for " + cname + " is " + n)
+                    return
+        else:
+           messagebox.showerror("Number missing!", "Please write a number for " + cname)
+           return
+        
+        i += 2
+    
+    if deck_size > deck_size_limit:
+        print(deck_size)
+        this_many = str(deck_size - deck_size_limit)
+        messagebox.showerror("Too many cards!", "Your deck is too big. Remove " + this_many + " cards.")
+        return
+    elif deck_size < deck_size_limit:
+        print(deck_size)
+        this_many = str(deck_size_limit - deck_size)
+        messagebox.showerror("Too few cards!", "Your deck is missing cards. Add " + this_many + " more cards.")
+        return
+    
+    print(deck_size)
+    
+    deck_to_analyze = deck_to_analyze[0:-2] # Getting rid of the last comma
+    
+    display = deck_classification(deck_to_analyze)
+    
+    deck_to_display += display
+    
+    response = messagebox.showinfo("Your " + deck_class + " deck", deck_to_display)
 
 def analyze_random_deck():
     deck_list = {}
     deck_size = 0
-    deck_size_limit = 30
     random_class = random.choice(classes)
     
     random_file = card_path + random_class + ".txt"

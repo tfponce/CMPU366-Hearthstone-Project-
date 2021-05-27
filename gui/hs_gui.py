@@ -14,12 +14,10 @@ root.iconbitmap("hnet.com-image.ico")
 root.geometry("500x519")
 fontExample = tkFont.Font(family="Arial", size=10, weight="bold", slant="italic")
 
-#root.config(bg='brown')
-
 my_img1 = ImageTk.PhotoImage(Image.open("start_screen.png"))
 my_img2 = ImageTk.PhotoImage(Image.open("card_plus_background.png"))
 my_img3 = ImageTk.PhotoImage(Image.open("deck_list_colored.png"))
-my_img4 = ImageTk.PhotoImage(Image.open("construction.png"))
+# my_img4 = ImageTk.PhotoImage(Image.open("construction.png"))  
 
 # Folder Paths
 card_path = "../data/cards/"
@@ -30,9 +28,10 @@ my_ngrams = load(open('../models/ngrams', 'rb'))
 my_label = Label(root, image=my_img1)
 my_label.pack() # Remember to keep this on a seperate line or else you will get an error
 
-choices = {"Demon Hunter", "Druid", "Hunter", "Mage", "Paladin", "Priest", "Rogue", "Shaman", "Warlock", "Warrior"}
+choices = {"Demon Hunter", "Druid", "Hunter", "Mage", "Neutral", "Paladin", "Priest", "Rogue", "Shaman", "Warlock", "Warrior"}
 classes = ["demonhunter", "druid", "hunter", "mage", "paladin", "priest", "rogue", "shaman", "warlock", "warrior"]
 types = ["spell", "minion", "weapon"]
+choose = {"HERO", "SPELL", "MINION", "WEAPON"}
 
 # This is only used for the generate section 
 first_push = 0  
@@ -41,6 +40,8 @@ first_push = 0
 deck_format = "'Format': 'Wild', "  
 deck_size_limit = 30
 
+# Dictionaries for different card attributes
+# The key is the card's name and the value is the specific attribute
 card_type = {}
 card_class = {}
 card_mana = {}
@@ -60,9 +61,35 @@ def gen_feats(deck):
         for d in deck:
             features["contains-" + d.lower()] = 1
         return features
-
+    
+def gen_card_info(deck, arch):
+    d_list = []
+    for d in deck:
+        cards = d.replace("': ", " : ")
+        cards = cards.split(", '")
+        length = len(cards)
+        d_string = cards[0][1:] + ", " + cards[1] + ", " 
+        i = 2
+        
+        if length > 5:
+            while i < length:
+                cname = str(cards[i].split(" : ")[0])
+                c = "Name : " + cname + ", "
+                m = "Mana : " + str(card_mana.get(cname)) + ", "
+                t = "Text : " + str(card_text.get(cname)) + ", "
+                a = "Attack : " + str(card_attack.get(cname)) + ", "
+                h = "Health : " + str(card_health.get(cname)) + ", "
+                d_string += c + m + t + a + h
+                i += 1
+                
+            d_list.append(d_string[:-1])
+        
+    tok_list = [(nltk.word_tokenize(x), arch) for x in d_list]
+    return tok_list
+            
 def native_bayes_classifier(): 
     global whatarch  
+    global cardarch
     
     deck_archetypes = [aggressive_decks, combo_decks, control_decks, midrange_decks]
 
@@ -71,33 +98,58 @@ def native_bayes_classifier():
     for deck in deck_archetypes:
         with open(deck, 'r') as d:
             if deck == aggressive_decks:
-                aggro = [(nltk.word_tokenize(x[0:-1]), "aggro") for x in d] 
+                aggro = [(nltk.word_tokenize(x[0:-1]), "aggro") for x in d if len(x) > 100] 
+                d.seek(0) # Start of the file
+                c_aggro = d.readlines()
+                c_aggro = gen_card_info(c_aggro, "aggro")
             elif deck == combo_decks:
-                combo = [(nltk.word_tokenize(x[0:-1]), "combo") for x in d]
+                combo = [(nltk.word_tokenize(x[0:-1]), "combo") for x in d if len(x) > 100]
+                d.seek(0)
+                c_combo = d.readlines()
+                c_combo = gen_card_info(c_combo, "combo")
             elif deck == control_decks:
-                control = [(nltk.word_tokenize(x[0:-1]), "control") for x in d]
+                control = [(nltk.word_tokenize(x[0:-1]), "control") for x in d if len(x) > 100]
+                d.seek(0)
+                c_control = d.readlines()
+                c_control = gen_card_info(c_control, "control")
             else:
-                mid = [(nltk.word_tokenize(x[0:-1]), "mid") for x in d]
+                mid = [(nltk.word_tokenize(x[0:-1]), "mid") for x in d if len(x) > 100]
+                d.seek(0)
+                c_mid = d.readlines()
+                c_mid = gen_card_info(c_mid, "mid")
                 
     arch_decks = [*aggro, *combo, *control, *mid] # Join lists
+    card_decks = [*c_aggro, *c_combo, *c_control, *c_mid] # Join lists
     random.Random(10).shuffle(arch_decks)
+    random.Random(10).shuffle(card_decks)
 
     # Partitioning
     test_archdecks = [x for x in arch_decks[0:200]]  
     devtest_archdecks = [x for x in arch_decks[200:400]]  
-    train_archdecks = [x for x in arch_decks[400:]]  
+    train_archdecks = [x for x in arch_decks[400:]]
+    
+    ctest_archdecks = [x for x in card_decks[0:200]]  
+    cdevtest_archdecks = [x for x in card_decks[200:400]]  
+    ctrain_archdecks = [x for x in card_decks[400:]]    
 
     # Generating feature sets
     test_feats = [(gen_feats(d), c)  for (d,c) in test_archdecks]  
     devtest_feats = [(gen_feats(d), c) for (d,c) in devtest_archdecks]  
     train_feats = [(gen_feats(d), c) for (d,c) in train_archdecks] 
-
+    
+    ctest_feats = [(gen_feats(d), c)  for (d,c) in ctest_archdecks]  
+    cdevtest_feats = [(gen_feats(d), c) for (d,c) in cdevtest_archdecks]  
+    ctrain_feats = [(gen_feats(d), c) for (d,c) in ctrain_archdecks]
+    
     # Training...
     whatarch = nltk.NaiveBayesClassifier.train(train_feats)  
+    cardarch = nltk.NaiveBayesClassifier.train(ctrain_feats)  
 
     # Testing...
-    accuracy = nltk.classify.accuracy(whatarch, test_feats)  
+    accuracy = nltk.classify.accuracy(whatarch, test_feats)
+    accuracy2 = nltk.classify.accuracy(cardarch, ctest_feats)  
     #print("Accuracy score: ", accuracy)
+    #print("Accuracy score: ", accuracy2)
 
     # aa: real deck aggro, guessed aggro
     # ao: real deck aggro, guessed combo
@@ -122,7 +174,7 @@ def native_bayes_classifier():
     oo, oa, oc, om = [], [], [], [] 
     cc, ca, co, cm = [], [], [], []
     mm, ma, mc, mo = [], [], [], []
-    for (deck, auth) in devtest_archdecks:
+    for (deck, auth) in cdevtest_archdecks:
         guess = whatarch.classify(gen_feats(deck))
         if auth == "aggro" and guess == "aggro":
             aa.append((auth, guess, deck))
@@ -167,9 +219,10 @@ def native_bayes_classifier():
         else:
             print("No guesses were made for this list")
             print("-------")
-    print() """
+    print() """ 
 
-    # whatarch.show_most_informative_feats_all(40)
+    #whatarch.show_most_informative_feats_all(40)
+    #cardarch.show_most_informative_feats_all(40)
     
 def card_library_creator():
     classes_and_neutral = classes + ["neutral"]
@@ -178,7 +231,8 @@ def card_library_creator():
         with open(class_file, "r", encoding="utf8") as cf:
             cards = cf.readlines()
             for x in cards:
-                values = x.split(", '")
+                values = x.replace("': ", " : ")
+                values = values.split(", '")
                 name = ""
                 cardclass = ""
                 rarity = ""
@@ -190,35 +244,35 @@ def card_library_creator():
                 health = ""
         
                 for v in values:
-                    if "name': " in v:
+                    if "name : " in v:
                         name = v
-                        name = name.split("name': ")[-1][1:-1]
-                    elif "cardClass': " in v:
+                        name = name.split(" : ")[-1][1:-1]
+                    elif "cardClass : " in v:
                         cardclass = v
-                        cardclass = cardclass.split("cardClass': ")[-1][1:-1]
+                        cardclass = cardclass.split(" : ")[-1][1:-1]
                         if cardclass == "DEMONHUNTER":
                             cardclass = "Demon Hunter"
                         else:
                             cardclass = cardclass.lower().capitalize()
-                    elif "rarity': " in v:
+                    elif "rarity : " in v:
                         rarity = v
-                        rarity = rarity.split("rarity': ")[-1][1:-1]
-                    elif "cost': " in v:
+                        rarity = rarity.split(" : ")[-1][1:-1]
+                    elif "cost : " in v:
                         mana = v
-                        mana = mana.split("cost': ")[-1]
-                    elif "text': " in v:
+                        mana = mana.split(" : ")[-1]
+                    elif "text : " in v:
                         text2 = v
-                        text2 = text2.split("text': ")[-1][1:-1]
+                        text2 = text2.split(" : ")[-1][1:-1]
                         text = text2.replace("<b>", "").replace("</b>", "")
-                    elif "attack': " in v:
+                    elif "attack : " in v:
                         attack = v
-                        attack = attack.split("attack': ")[-1]
-                    elif "health': " in v:
+                        attack = attack.split(" : ")[-1]
+                    elif "health : " in v:
                         health = v
-                        health = health.split("health': ")[-1]
-                    elif "type': " in v:
+                        health = health.split(" : ")[-1]
+                    elif "type : " in v:
                         cardtype = v
-                        cardtype = cardtype.split("type': ")[-1][1:-1]
+                        cardtype = cardtype.split(" : ")[-1][1:-1]
                         
                 card_type[name] = cardtype
                 card_class[name] = cardclass
@@ -229,19 +283,19 @@ def card_library_creator():
                 card_attack[name] = attack
                 card_health[name] = health
 
-def deck_classification(deck):
+def deck_classification(deck, classifier):
     tokenized_deck = gen_feats(nltk.word_tokenize(deck))
-    classify_deck = whatarch.classify(tokenized_deck).upper()
+    classify_deck = classifier.classify(tokenized_deck).upper()
     
     newline = "\n"
     
-    str_classify = "The best archetype for this deck is: " + classify_deck + "\n"
+    str_classify = "The best archetype for this is: " + classify_deck + "\n"
     line = "-------------------------------------------------------\n"
     
-    aggro_prob = whatarch.prob_classify(tokenized_deck).prob('aggro')
-    combo_prob = whatarch.prob_classify(tokenized_deck).prob('combo')
-    control_prob = whatarch.prob_classify(tokenized_deck).prob('control')
-    mid_prob = whatarch.prob_classify(tokenized_deck).prob('mid')
+    aggro_prob = classifier.prob_classify(tokenized_deck).prob('aggro')
+    combo_prob = classifier.prob_classify(tokenized_deck).prob('combo')
+    control_prob = classifier.prob_classify(tokenized_deck).prob('control')
+    mid_prob = classifier.prob_classify(tokenized_deck).prob('mid')
     
     str_aggro = "P(Aggro | Deck) = " + str(aggro_prob) + "\n"
     str_combo = "P(Combo | Deck) = " + str(combo_prob) + "\n"
@@ -252,22 +306,76 @@ def deck_classification(deck):
     
     return display
 
-def analyze_card(mana, name, attack, health, text_box, tkvar):
-    card_text = text_box.get("1.0",END)
-    if mana.get() == "Mana: " or name.get() == "Name: " or attack.get() == "Attack: " or health.get() == "Health: ":
-        response = messagebox.showwarning("Missing Info!", "Fill out all of the card info!")
-    else:
-        if card_text == "\n":
-            card_text = "VANILLA" 
-        # This is where we need to write the code that actually analyzes the card 
+def analyze_card(mana, name, attack, health, text_box, tkvar, var):
+    cardtext = text_box.get("1.0",END)
+    cardclass = tkvar.get()
+    cardtype = var.get()
+    
+    if cardclass == "Pick a class":
+        messagebox.showerror("Missing Info!", "Please select a class for your card.")
+        return
+    elif cardtype == "Pick a type":
+        messagebox.showerror("Missing Info!", "Please select a type for your card.")
+        return
+    
+    if cardtype == "HERO":
+        if mana.get() == "Mana: " or name.get() == "Name: " or health.get() == "Health: ":
+            messagebox.showwarning("Missing Info!", "Fill out all of the card info! \n" + 
+                                   "The attack section should be empty.")
+            return
+        elif attack.get() != "Attack: ":
+            messagebox.showwarning("Remove Info!", "Please remove info! \n" + 
+                                   "The attack section should be empty.")
+            return
+    elif cardtype == "MINION": 
+        if mana.get() == "Mana: " or name.get() == "Name: " or attack.get() == "Attack: " or health.get() == "Health: ":
+            messagebox.showwarning("Missing Info!", "Fill out all of the card info! \n" + 
+                                "The card text section is optional.")
+            return
+    elif cardtype == "SPELL":
+        if mana.get() == "Mana: " or name.get() == "Name: ":
+            messagebox.showwarning("Missing Info!", "Fill out all of the card info! \n" + 
+                                   "The attack and health section should be empty.")
+            return
+        elif attack.get() != "Attack: " or health.get() != "Health: ":
+            messagebox.showwarning("Remove Info!", "Please remove info! \n" + 
+                                   "The attack and health section should be empty.")
+            return
+    else: 
+        if mana.get() == "Mana: " or name.get() == "Name: " or attack.get() == "Attack: " or health.get() == "Health: ":
+            messagebox.showwarning("Missing Info!", "Fill out all of the card info! \n" + 
+                                "The card text section is optional.")
+            return
+    
+    n = "Name : " + name.get().replace("Name: ", "") + ", "
+    n_d = "Name : " + name.get().replace("Name: ", "") + "\n"
+    m = "Mana : " + mana.get().replace("Mana: ", "") + ", "
+    m_d = "Mana : " + mana.get().replace("Mana: ", "") + "\n"
+    t = "Text : " + cardtext + ", "
+    t_d = "Text : " + cardtext + "\n"
+    a = "Attack : " + attack.get().replace("Attack: ", "") + ", "
+    a_d = "Attack : " + attack.get().replace("Attack: ", "") + "\n"
+    h = "Health : " + health.get().replace("Health: ", "") + ", "
+    h_d = "Health : " + health.get().replace("Health: ", "") + "\n"
+    cf = "Class : " + cardclass + ", " + deck_format + ", "
+    cf_d = "Class : " + cardclass + "\n" + deck_format + "\n"
+    
+    card_to_analyze = cf + n + m + t + a + h
+    card_to_display = cf_d + n_d + m_d + t_d + a_d + h_d
+    
+    display = deck_classification(card_to_analyze, cardarch)
+
+    card_to_display += display
+    
+    messagebox.showinfo("Your " + cardclass + " deck", card_to_display)
+    
     
 def analyze_deck(text_box, tkvar):
     if tkvar.get() == "Pick a class":
-        messagebox.showerror("Missing Info!", "Please select a class for your deck")
+        messagebox.showerror("Missing Info!", "Please select a class for your deck.")
         return
     
     user_list = text_box.get("1.0",'end-1c').replace("\n", " : ").split(" : ")
-    print(user_list)
     list_len = len(user_list)
     deck_class = tkvar.get()
     deck_to_analyze = "'Class': " + "'" + deck_class + "', " + deck_format
@@ -281,6 +389,11 @@ def analyze_deck(text_box, tkvar):
     
     while i < list_len:
         cname = user_list[i]
+        
+        if not card_type.has_keys(cname) or cname != "Arcane Golem":
+            messagebox.showerror("Unknown Card!", cname + " is not a recognized card.")
+            return
+        
         copies = user_list[i+1].strip()
         cards = ""
         
@@ -313,21 +426,17 @@ def analyze_deck(text_box, tkvar):
         i += 2
     
     if deck_size > deck_size_limit:
-        print(deck_size)
         this_many = str(deck_size - deck_size_limit)
         messagebox.showerror("Too many cards!", "Your deck is too big. Remove " + this_many + " cards.")
         return
     elif deck_size < deck_size_limit:
-        print(deck_size)
         this_many = str(deck_size_limit - deck_size)
         messagebox.showerror("Too few cards!", "Your deck is missing cards. Add " + this_many + " more cards.")
         return
     
-    print(deck_size)
-    
     deck_to_analyze = deck_to_analyze[0:-2] # Getting rid of the last comma
     
-    display = deck_classification(deck_to_analyze)
+    display = deck_classification(deck_to_analyze, whatarch)
     
     deck_to_display += display
     
@@ -397,13 +506,12 @@ def analyze_random_deck():
         
     deck_to_analyze = deck_to_analyze[0:-2] # Getting rid of the last comma
     
-    display = deck_classification(deck_to_analyze)
+    display = deck_classification(deck_to_analyze, whatarch)
     
     deck_to_display += display
     
     response = messagebox.showinfo("Random " + deck_class + " deck", deck_to_display)
             
-
 def analyze_generated():
     return
 
@@ -549,8 +657,7 @@ def deck_page():
     button_generate = Button(root, text="Generate A Card", bg='#567', fg='White', command=generate_page)
     button_generate.place(x=382, y=465)
     button_generate.configure(font=fontExample)
-    
-    
+        
 def card_page():
     global my_label
     global button_deck
@@ -591,15 +698,21 @@ def card_page():
     tkvar = StringVar(root)
     tkvar.set('Pick a class')
     popupMenu = OptionMenu(root, tkvar, *choices)
-    popupMenu.place(x=190, y=7)
+    popupMenu.place(x=15, y=7)
     popupMenu.configure(font=fontExample)
+    
+    var = StringVar(root)
+    var.set('Pick a type')
+    dropMenu = OptionMenu(root, var, *choose)
+    dropMenu.place(x=375, y=7)
+    dropMenu.configure(font=fontExample)
     
     button_deck = Button(root, text="Check Deck List", bg='#567', fg='White', command=deck_page)
     button_deck.place(x=5, y=465)
     button_deck.configure(font=fontExample)
     
     button_card = Button(root, text="Analyze Card", command=lambda: 
-                            analyze_card(mana,name,attack,health,text_box,tkvar))
+                            analyze_card(mana,name,attack,health,text_box,tkvar,var))
     button_card.place(x=200, y=465)
     button_card.configure(font=fontExample)
     

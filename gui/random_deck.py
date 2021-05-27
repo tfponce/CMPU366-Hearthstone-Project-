@@ -18,11 +18,7 @@ with open(random_archetype, 'r', encoding="ISO-8859-1") as arch_file:
 
 random_deck = random.choice(arch_cards)
 deck = random_deck.replace("': ", " : ")
-deck = random_deck.replace('": ', " : ")
 deck = deck.split(", '")
 
 for d in deck:
-    d = d.replace("': ", " : ")
-    if ', "' in d:
-        d = d.replace(', "', "\n")
     print(d)

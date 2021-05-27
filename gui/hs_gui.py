@@ -7,6 +7,9 @@ from tkinter import messagebox
 import tkinter.font as tkFont
 from pickle import load
 from nltk.util import ngrams
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import load_model
+import numpy as np
 
 root = Tk()
 root.title("Archinator") 
@@ -24,6 +27,8 @@ card_path = "../data/cards/"
 deck_path = "../data/decks/cleaner/"
 
 my_ngrams = load(open('../models/ngrams', 'rb'))
+my_lstm = load_model('../models/model.h5')
+my_tokenizer = load(open('../models/tokenizer.pkl', 'rb'))
 
 my_label = Label(root, image=my_img1)
 my_label.pack() # Remember to keep this on a seperate line or else you will get an error
@@ -562,58 +567,83 @@ def generate_card(Class, mana, Type, attack, health, text_box):
     else:
         tokens = inpt_str.lower().split()[2:]
 
-    ngram_size = generation_type.get() + 1
+    if generation_type.get() != 3:
 
-    ngram_dict = {1:[], 2:[], 3:[]} 
-    ngram_dict[ngram_size] = list(ngrams(tokens, ngram_size))[-1]
+        ngram_size = generation_type.get() + 1
 
-    pred = {1:[], 2:[], 3:[]}
-    count = 0
-    curNgram = ngram_dict[ngram_size]
+        ngram_dict = {1:[], 2:[], 3:[]} 
+        ngram_dict[ngram_size] = list(ngrams(tokens, ngram_size))[-1]
 
-    while count < 40:
-        for each in my_ngrams[ngram_size+1]:
-            if each[0][:-1] == curNgram:
+        pred = {1:[], 2:[], 3:[]}
+        count = 0
+        curNgram = ngram_dict[ngram_size]
 
-                pred[ngram_size].append(each[0][-1])
+        while count < 40:
+            for each in my_ngrams[ngram_size+1]:
+                if each[0][:-1] == curNgram:
 
-                curNgram = curNgram[1:] + (each[0][-1], )
+                    pred[ngram_size].append(each[0][-1])
 
+                    curNgram = curNgram[1:] + (each[0][-1], )
+
+                    break
+
+            if len(pred[ngram_size]) == count:
+                pred[ngram_size].append(my_ngrams[ngram_size+1][0][0][-1])
+                curNgram = curNgram[1:] + (my_ngrams[ngram_size+1][0][0][-1], )
+            count +=1
+            if curNgram[-1] == "</s>":
                 break
 
-        if len(pred[ngram_size]) == count:
-            pred[ngram_size].append(my_ngrams[ngram_size+1][0][0][-1])
-            curNgram = curNgram[1:] + (my_ngrams[ngram_size+1][0][0][-1], )
-        count +=1
-        if curNgram[-1] == "</s>":
-            break
+        if Type.get()[6:].lower() == "minion" or Type.get()[6:].lower() == "weapon":
+            if extra_info == 0 and len(pred[ngram_size]) >= 2:
+                # Remove begining attack and health and ending </s> tage and join predicted text
+                text = " ".join(pred[ngram_size][2:(len(pred[ngram_size]) - 1)])
 
-    text_box.delete('1.0', END)
+                attack_text = pred[ngram_size][0]
+                health_text = pred[ngram_size][1]
 
-    if Type.get()[6:].lower() == "minion" or Type.get()[6:].lower() == "weapon":
-        if extra_info == 0 and len(pred[ngram_size]) >= 2:
-            # Remove begining attack and health and ending </s> tage and join predicted text
-            text = " ".join(pred[ngram_size][2:(len(pred[ngram_size]) - 1)])
+                attack.insert(END, attack_text)
+                health.insert(END, health_text)
+            elif extra_info == 1 and len(pred[ngram_size]) >= 1:
+                # Remove begining health and ending </s> tage and join predicted text
+                text = " ".join(pred[ngram_size][1:(len(pred[ngram_size]) - 1)])
 
-            attack_text = pred[ngram_size][0]
-            health_text = pred[ngram_size][1]
-
-            attack.insert(END, attack_text)
-            health.insert(END, health_text)
-        elif extra_info == 1 and len(pred[ngram_size]) >= 1:
-            # Remove begining health and ending </s> tage and join predicted text
-            text = " ".join(pred[ngram_size][1:(len(pred[ngram_size]) - 1)])
-
-            health_text = pred[ngram_size][0]
-            health.insert(END, health_text)
+                health_text = pred[ngram_size][0]
+                health.insert(END, health_text)
+            else:
+                # Remove ending </s> tage and join predicted text
+                text = " ".join(pred[ngram_size][0:(len(pred[ngram_size]) - 1)])
         else:
             # Remove ending </s> tage and join predicted text
             text = " ".join(pred[ngram_size][0:(len(pred[ngram_size]) - 1)])
-    else:
-        # Remove ending </s> tage and join predicted text
-        text = " ".join(pred[ngram_size][0:(len(pred[ngram_size]) - 1)])
 
-    text_box.insert('1.0', text)
+        text_box.insert('1.0', text)
+    else:
+        # LSTM generation
+        pred = []
+        encoded = my_tokenizer.texts_to_sequences([inpt_str.lower()])[0]
+        encoded = pad_sequences([encoded], maxlen=10, truncating='pre')
+
+        yhat = my_lstm.predict(encoded, verbose=0)
+        for probs in yhat:
+            index = np.argmax(probs)
+            if index != 0:
+                pred.append(int(index))
+        pred = my_tokenizer.sequences_to_texts([pred])
+
+        if Type.get()[6:].lower() == "minion" or Type.get()[6:].lower() == "weapon":
+            if extra_info == 0 and len(pred) >=2:
+                attack.insert(END, pred[0])
+                health.insert(END, pred[1])
+                text_box.insert('1.0', " ".join(pred[2:]))
+            elif extra_info == 1 and len(pred) >= 1:
+                health.insert(END, pred[0])
+                text_box.insert('1.0', " ".join(pred[1:]))
+            else:
+                text_box.insert('1.0', " ".join(pred))
+        else:
+            text_box.insert('1.0', " ".join(pred))
 
     first_push = 1 # The button has been pushed
 
@@ -796,6 +826,7 @@ generation_menu = Menu(menubar)
 generation_menu.add_radiobutton(label="Bigram",  variable=generation_type, value=0)
 generation_menu.add_radiobutton(label="Trigram", variable=generation_type, value=1)
 generation_menu.add_radiobutton(label="Fourgram", variable=generation_type, value=2)
+generation_menu.add_radiobutton(label="LSTM", variable=generation_type, value=3)
 menubar.add_cascade(label='Generator', menu=generation_menu)
 root.config(menu=menubar)
 

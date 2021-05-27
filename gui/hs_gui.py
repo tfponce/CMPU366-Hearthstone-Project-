@@ -395,7 +395,7 @@ def analyze_deck(text_box, tkvar):
     while i < list_len:
         cname = user_list[i]
         
-        if not card_type.has_keys(cname) or cname != "Arcane Golem":
+        if cname not in card_type and cname != "Arcane Golem":
             messagebox.showerror("Unknown Card!", cname + " is not a recognized card.")
             return
         
